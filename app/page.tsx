@@ -98,27 +98,29 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
         </div>
-        <div className="container-x py-20 md:py-32 lg:py-40 max-w-4xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />
-            Engineered Drive Solutions
-          </span>
-          <h1 className="mt-6 heading-1 text-white">
-            Powering<br />
-            Precision<br />
-            <span className="text-brand-orange">In Motion.</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-base md:text-lg text-white/85 leading-relaxed">
-            Gear units, geared motors and drive electronics — engineered for reliability, backed by
-            application expertise and ready stock across India.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/products" className="btn-primary">
-              Explore Products <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/contact" className="btn-outline-white">
-              Request a Quote
-            </Link>
+        <div className="container-x py-24 md:py-36 lg:py-48">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />
+              Engineered Drive Solutions
+            </span>
+            <h1 className="mt-6 heading-1 text-white">
+              Powering<br />
+              Precision<br />
+              <span className="text-brand-orange">In Motion.</span>
+            </h1>
+            <p className="mt-6 text-base md:text-lg text-white/85 leading-relaxed">
+              Gear units, geared motors and drive electronics — engineered for reliability, backed by
+              application expertise and ready stock across India.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/products" className="btn-primary">
+                Explore Products <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/contact" className="btn-outline-white">
+                Request a Quote
+              </Link>
+            </div>
           </div>
         </div>
       </section>
