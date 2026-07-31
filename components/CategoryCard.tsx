@@ -15,6 +15,7 @@ type Props = {
   description: string;
   icon: keyof typeof iconMap;
   cta?: string;
+  variant?: "light" | "dark";
 };
 
 export default function CategoryCard({
@@ -23,27 +24,47 @@ export default function CategoryCard({
   description,
   icon,
   cta = "View range",
+  variant = "light",
 }: Props) {
   const Icon = iconMap[icon];
+  const isDark = variant === "dark";
+
+  const wrapperClass = isDark
+    ? "group flex flex-col h-full rounded-xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/[0.08] hover:border-white/20 transition-colors"
+    : "card group flex flex-col h-full";
+  const titleClass = isDark
+    ? "text-lg md:text-xl text-white"
+    : "text-lg md:text-xl text-brand-black";
+  const descClass = isDark
+    ? "text-sm text-neutral-300 leading-relaxed flex-1"
+    : "text-sm text-neutral-600 leading-relaxed flex-1";
+
   return (
-    <Link
-      href={`/products/${slug}`}
-      className="card group flex flex-col h-full"
-    >
-      <ImagePlaceholder
-        alt={`${title} product photograph`}
-        aspect="16/9"
-        rounded="rounded-none"
-        label={title}
-      />
-      <div className="p-6 flex flex-col gap-3 flex-1">
-        <div className="flex items-center gap-3">
-          <span className="chip-icon">
+    <Link href={`/products/${slug}`} className={wrapperClass}>
+      <div className="relative">
+        <ImagePlaceholder
+          alt={`${title} product photograph`}
+          aspect="16/9"
+          rounded="rounded-none"
+          label={title}
+        />
+        {isDark && (
+          <span className="absolute top-4 left-4 inline-flex items-center justify-center w-11 h-11 rounded-lg bg-brand-orange text-white shadow-card">
             <Icon className="w-5 h-5" />
           </span>
-          <h3 className="text-lg md:text-xl text-brand-black">{title}</h3>
-        </div>
-        <p className="text-sm text-neutral-600 leading-relaxed flex-1">{description}</p>
+        )}
+      </div>
+      <div className="p-6 flex flex-col gap-3 flex-1">
+        {!isDark && (
+          <div className="flex items-center gap-3">
+            <span className="chip-icon">
+              <Icon className="w-5 h-5" />
+            </span>
+            <h3 className={titleClass}>{title}</h3>
+          </div>
+        )}
+        {isDark && <h3 className={titleClass}>{title}</h3>}
+        <p className={descClass}>{description}</p>
         <span className="link-arrow mt-2">
           {cta} <ArrowRight className="w-4 h-4" />
         </span>

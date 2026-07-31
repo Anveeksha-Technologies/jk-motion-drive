@@ -223,15 +223,21 @@ export default function HomePage() {
       </section>
 
       {/* PRODUCT RANGE */}
-      <section className="section bg-neutral-50">
+      <section className="section bg-brand-black text-white">
         <div className="container-x">
-          <SectionHeading
-            eyebrow="Our Range"
-            title="Engineered Drive Products"
-            subtitle="Four core categories, engineered to work together — from a single geared motor to a fully packaged drive system."
-            align="center"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-end mb-12 md:mb-16">
+            <div>
+              <span className="eyebrow">Our Range</span>
+              <h2 className="mt-3 heading-2 text-white">
+                Engineered Drive Products
+              </h2>
+            </div>
+            <p className="text-base md:text-lg text-neutral-300 leading-relaxed lg:pl-8">
+              Four core categories, engineered to work together — from a single geared motor to a
+              fully packaged drive system.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {productCategories.map((cat) => (
               <CategoryCard
                 key={cat.slug}
@@ -239,6 +245,7 @@ export default function HomePage() {
                 title={cat.title}
                 description={cat.shortDescription}
                 icon={cat.icon}
+                variant="dark"
               />
             ))}
           </div>
