@@ -41,34 +41,22 @@ export default function CategoryCard({
     ? "text-sm text-neutral-300 leading-relaxed"
     : "text-sm text-neutral-600 leading-relaxed flex-1";
 
-  const imageWrapClass = featured
-    ? "relative flex-1 min-h-[280px]"
-    : "relative";
-
   return (
     <Link href={`/products/${slug}`} className={wrapperClass}>
-      <div className={imageWrapClass}>
-        {featured ? (
-          <div
-            role="img"
-            aria-label={`${title} product photograph`}
-            className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-white/[0.02]"
-          />
-        ) : (
-          <ImagePlaceholder
-            alt={`${title} product photograph`}
-            aspect="16/9"
-            rounded="rounded-none"
-            label={title}
-          />
-        )}
+      <div className="relative">
+        <ImagePlaceholder
+          alt={`${title} product photograph`}
+          aspect={featured ? "4/3" : "16/9"}
+          rounded="rounded-none"
+          label={title}
+        />
         {isDark && (
           <span className="absolute top-4 left-4 inline-flex items-center justify-center w-11 h-11 rounded-lg bg-brand-orange text-white shadow-card">
             <Icon className="w-5 h-5" />
           </span>
         )}
       </div>
-      <div className="p-6 flex flex-col gap-3">
+      <div className="p-6 flex flex-col gap-3 flex-1">
         {!isDark && (
           <div className="flex items-center gap-3">
             <span className="chip-icon">
@@ -79,7 +67,7 @@ export default function CategoryCard({
         )}
         {isDark && <h3 className={titleClass}>{title}</h3>}
         <p className={descClass}>{description}</p>
-        <span className="link-arrow mt-2">
+        <span className="link-arrow mt-auto pt-2">
           {cta} <ArrowRight className="w-4 h-4" />
         </span>
       </div>

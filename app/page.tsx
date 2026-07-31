@@ -237,34 +237,42 @@ export default function HomePage() {
               fully packaged drive system.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6 md:gap-8 auto-rows-fr">
-            {productCategories.map((cat, i) => {
-              // Bento layout on lg+:
-              // 0 (Gear Units)         -> tall left column (row-span-2)
-              // 1 (Electric Motors)    -> wide top-right (col-span-2)
-              // 2 (Drive Electronics)  -> bottom middle
-              // 3 (Complete Systems)   -> bottom right
-              let spanClass = "";
-              let featured = false;
-              if (i === 0) {
-                spanClass = "md:col-span-2 lg:col-span-1 lg:row-span-2";
-                featured = true;
-              } else if (i === 1) {
-                spanClass = "lg:col-span-2";
-              }
-              return (
-                <div key={cat.slug} className={spanClass}>
-                  <CategoryCard
-                    slug={cat.slug}
-                    title={cat.title}
-                    description={cat.shortDescription}
-                    icon={cat.icon}
-                    variant="dark"
-                    featured={featured}
-                  />
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            {/* Left column: 1 big featured card */}
+            <CategoryCard
+              slug={productCategories[0].slug}
+              title={productCategories[0].title}
+              description={productCategories[0].shortDescription}
+              icon={productCategories[0].icon}
+              variant="dark"
+              featured
+            />
+            {/* Right column: 1 wide card on top, 2 side-by-side below */}
+            <div className="flex flex-col gap-6 md:gap-8">
+              <CategoryCard
+                slug={productCategories[1].slug}
+                title={productCategories[1].title}
+                description={productCategories[1].shortDescription}
+                icon={productCategories[1].icon}
+                variant="dark"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+                <CategoryCard
+                  slug={productCategories[2].slug}
+                  title={productCategories[2].title}
+                  description={productCategories[2].shortDescription}
+                  icon={productCategories[2].icon}
+                  variant="dark"
+                />
+                <CategoryCard
+                  slug={productCategories[3].slug}
+                  title={productCategories[3].title}
+                  description={productCategories[3].shortDescription}
+                  icon={productCategories[3].icon}
+                  variant="dark"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
