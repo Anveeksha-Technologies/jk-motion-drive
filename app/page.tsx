@@ -14,7 +14,6 @@ import {
 import CategoryCard from "@/components/CategoryCard";
 import CtaBanner from "@/components/CtaBanner";
 import FeatureIconCard from "@/components/FeatureIconCard";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import IndustryCard from "@/components/IndustryCard";
 import SectionHeading from "@/components/SectionHeading";
 import { productCategories } from "@/lib/products";
@@ -158,15 +157,22 @@ export default function HomePage() {
       <section className="section bg-white">
         <div className="container-x grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
-            <span className="eyebrow">About JK Motion Drive</span>
+            <span className="eyebrow">Who We Are</span>
             <h2 className="mt-3 heading-2 text-brand-black">
-              We don&apos;t just sell parts.
+              Your Drive<br />Technology Partner
             </h2>
-            <p className="mt-5 body-lg">
-              We size the right drive for your load, ratio and duty, hold core ranges in local
-              stock, and stay with you through installation, commissioning and the life of the
-              drive.
-            </p>
+            <div className="mt-6 space-y-5 body-lg">
+              <p>
+                JK Motion Drive supplies complete power-transmission and motion-control solutions
+                to industry across India — gear units, geared motors, electric motors and drive
+                electronics, selected, stocked and supported by our own engineering team.
+              </p>
+              <p>
+                We don&apos;t just sell parts. We size the right drive for your load, ratio and
+                duty, hold core ranges in local stock, and stay with you through installation,
+                commissioning and the life of the drive.
+              </p>
+            </div>
             <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {homeChecklist.map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-brand-black font-medium">
@@ -181,7 +187,23 @@ export default function HomePage() {
               More About Us <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <ImagePlaceholder alt="Engineer at a workstation" aspect="4/3" label="About visual" />
+          <div className="relative">
+            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100">
+              <Image
+                src="/images/about-engineer.jpg"
+                alt="Engineer working with drive electronics on a production line"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+            </div>
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-brand-orange text-white px-5 py-4 rounded-xl shadow-card-hover">
+              <div className="font-display text-3xl md:text-4xl leading-none">10+</div>
+              <div className="mt-1 text-[11px] md:text-xs font-semibold uppercase tracking-wider">
+                Years of Expertise
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
