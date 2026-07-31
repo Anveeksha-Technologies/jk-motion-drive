@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Box,
   Check,
+  ChevronDown,
   Quote,
   Search,
   Sliders,
@@ -16,7 +17,7 @@ import FeatureIconCard from "@/components/FeatureIconCard";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import IndustryCard from "@/components/IndustryCard";
 import SectionHeading from "@/components/SectionHeading";
-import StatsBar from "@/components/StatsBar";
+import StatCounter from "@/components/StatCounter";
 import { productCategories } from "@/lib/products";
 import { industries } from "@/lib/industries";
 import { whyChooseUs } from "@/lib/site";
@@ -80,6 +81,12 @@ const homeChecklist = [
   "After-sales support",
 ];
 
+const heroStats = [
+  { value: 100, suffix: "+", label: "Industries Served" },
+  { value: 500, suffix: "+", label: "Drive Configurations" },
+  { value: 10, suffix: "+", label: "Years of Expertise" },
+];
+
 export default function HomePage() {
   const previewIndustries = industries.slice(0, 8);
 
@@ -98,7 +105,7 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
         </div>
-        <div className="container-x py-24 md:py-36 lg:py-48">
+        <div className="container-x py-24 md:py-32 lg:py-40">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />
@@ -121,7 +128,33 @@ export default function HomePage() {
                 Request a Quote
               </Link>
             </div>
+
+            {/* Hero stats overlay */}
+            <div className="mt-12 md:mt-16 rounded-xl border border-white/15 bg-black/30 backdrop-blur-sm p-5 md:p-6 grid grid-cols-3 gap-4 md:gap-6 max-w-xl">
+              {heroStats.map((s) => (
+                <div
+                  key={s.label}
+                  className="border-l-2 border-brand-orange/60 pl-3 md:pl-4"
+                >
+                  <StatCounter
+                    value={s.value}
+                    suffix={s.suffix}
+                    align="left"
+                    valueClassName="font-display text-3xl md:text-5xl text-white leading-none"
+                  />
+                  <div className="mt-2 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-white/70">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+
+        {/* SCROLL indicator */}
+        <div className="absolute left-1/2 bottom-6 md:bottom-8 -translate-x-1/2 flex flex-col items-center gap-1 text-white/70">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.3em]">Scroll</span>
+          <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </section>
 
@@ -194,9 +227,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* STATS BAR */}
-      <StatsBar />
 
       {/* INDUSTRIES TEASER */}
       <section className="section bg-white">
