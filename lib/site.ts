@@ -30,23 +30,23 @@ export const stats = [
 
 export const whyChooseUs = [
   {
-    icon: "shield-check",
-    title: "Quality",
-    body: "Only genuine, warrantied products — no compromises.",
+    icon: "badge-check",
+    title: "Genuine Products",
+    body: "Sourced through authorised channels with full warranty and traceability.",
   },
   {
-    icon: "target",
-    title: "Reliability",
-    body: "Drives that keep running, shift after shift.",
+    icon: "pencil-ruler",
+    title: "Application Engineering",
+    body: "The right drive selected for your load, ratio and duty — not a part off the shelf.",
   },
   {
-    icon: "wrench",
-    title: "Engineering Support",
-    body: "Real selection help from people who know drives.",
+    icon: "truck",
+    title: "Ready Stock & Fast Delivery",
+    body: "Local availability of core ranges to minimise downtime and keep lines moving.",
   },
   {
-    icon: "heart",
-    title: "Customer-First",
-    body: "Your uptime and outcomes come before the sale.",
+    icon: "life-buoy",
+    title: "Lifetime Support",
+    body: "Installation, commissioning, spares and service for the full life of your drive.",
   },
 ];
