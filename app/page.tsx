@@ -17,6 +17,7 @@ import FeatureIconCard from "@/components/FeatureIconCard";
 import IndustryCard from "@/components/IndustryCard";
 import Marquee from "@/components/Marquee";
 import SectionHeading from "@/components/SectionHeading";
+import StatsBar from "@/components/StatsBar";
 import { productCategories } from "@/lib/products";
 import { industries } from "@/lib/industries";
 import { whyChooseUs } from "@/lib/site";
@@ -292,6 +293,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* STATS BAR */}
+      <StatsBar />
 
       {/* INDUSTRIES TEASER */}
       <section className="section bg-white">
