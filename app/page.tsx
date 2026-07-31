@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -87,12 +88,13 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative isolate overflow-hidden bg-brand-black text-white">
         <div className="absolute inset-0 -z-10">
-          <ImagePlaceholder
-            alt="Industrial welding sparks — hero background"
-            aspect="21/9"
-            rounded="rounded-none"
-            className="h-full !border-0"
-            label="Hero background"
+          <Image
+            src="/images/hero.jpg"
+            alt="Industrial welding sparks"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
         </div>
