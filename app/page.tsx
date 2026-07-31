@@ -17,7 +17,6 @@ import FeatureIconCard from "@/components/FeatureIconCard";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import IndustryCard from "@/components/IndustryCard";
 import SectionHeading from "@/components/SectionHeading";
-import StatCounter from "@/components/StatCounter";
 import { productCategories } from "@/lib/products";
 import { industries } from "@/lib/industries";
 import { whyChooseUs } from "@/lib/site";
@@ -82,9 +81,9 @@ const homeChecklist = [
 ];
 
 const heroStats = [
-  { value: 100, suffix: "+", label: "Industries Served" },
-  { value: 500, suffix: "+", label: "Drive Configurations" },
-  { value: 10, suffix: "+", label: "Years of Expertise" },
+  { label: "Industries Served" },
+  { label: "Drive Configurations" },
+  { label: "Years of Expertise" },
 ];
 
 export default function HomePage() {
@@ -136,12 +135,9 @@ export default function HomePage() {
                   key={s.label}
                   className="border-l-2 border-brand-orange/60 pl-3 md:pl-4"
                 >
-                  <StatCounter
-                    value={s.value}
-                    suffix={s.suffix}
-                    align="left"
-                    valueClassName="font-display text-3xl md:text-5xl text-white leading-none"
-                  />
+                  <div className="font-display text-3xl md:text-5xl text-white leading-none">
+                    0
+                  </div>
                   <div className="mt-2 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-white/70">
                     {s.label}
                   </div>
