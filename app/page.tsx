@@ -309,9 +309,14 @@ export default function HomePage() {
               </Link>
             }
           />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {previewIndustries.map((ind) => (
-              <IndustryCard key={ind.title} {...ind} />
+              <IndustryCard
+                key={ind.title}
+                title={ind.title}
+                icon={ind.icon}
+                compact
+              />
             ))}
           </div>
         </div>
