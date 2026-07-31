@@ -41,7 +41,7 @@ export default function Header() {
       <div className="container-x flex items-center justify-between h-16 md:h-20">
         <Logo />
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-0.5 xl:gap-1">
           {primaryNav.map((item) => {
             if (item.hasDropdown) {
               return (
@@ -53,7 +53,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold transition-colors ${
+                    className={`inline-flex items-center gap-1 px-2.5 xl:px-4 py-2 text-sm font-semibold transition-colors ${
                       isActive(item.href)
                         ? "text-brand-orange"
                         : "text-brand-black hover:text-brand-orange"
@@ -84,7 +84,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 text-sm font-semibold transition-colors ${
+                className={`px-2.5 xl:px-4 py-2 text-sm font-semibold transition-colors ${
                   isActive(item.href)
                     ? "text-brand-orange"
                     : "text-brand-black hover:text-brand-orange"
@@ -96,14 +96,14 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center">
+        <div className="hidden md:flex items-center ml-2">
           <Link href="/contact" className="btn-primary">
             Get a Quote <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         <button
-          className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-md text-brand-black hover:bg-neutral-100"
+          className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-md text-brand-black hover:bg-neutral-100"
           aria-label="Toggle menu"
           onClick={() => setMobileOpen((v) => !v)}
         >
@@ -112,7 +112,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-neutral-200 bg-white">
+        <div className="md:hidden border-t border-neutral-200 bg-white">
           <div className="container-x py-4 flex flex-col gap-1">
             {primaryNav.map((item) => {
               if (item.hasDropdown) {
