@@ -15,6 +15,7 @@ import CategoryCard from "@/components/CategoryCard";
 import CtaBanner from "@/components/CtaBanner";
 import FeatureIconCard from "@/components/FeatureIconCard";
 import IndustryCard from "@/components/IndustryCard";
+import Marquee from "@/components/Marquee";
 import SectionHeading from "@/components/SectionHeading";
 import { productCategories } from "@/lib/products";
 import { industries } from "@/lib/industries";
@@ -85,6 +86,17 @@ const heroStats = [
   { label: "Years of Expertise" },
 ];
 
+const marqueeHighlights = [
+  "Precision Engineering",
+  "ISO-Grade Quality",
+  "IE5+ Efficiency",
+  "Ready Stock",
+  "Application Support",
+  "Genuine Products",
+  "24/7 Service",
+  "Made for Industry",
+];
+
 export default function HomePage() {
   const previewIndustries = industries.slice(0, 8);
 
@@ -152,6 +164,9 @@ export default function HomePage() {
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </section>
+
+      {/* MARQUEE TICKER */}
+      <Marquee items={marqueeHighlights} />
 
       {/* ABOUT TEASER */}
       <section className="section bg-white">
