@@ -237,17 +237,34 @@ export default function HomePage() {
               fully packaged drive system.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {productCategories.map((cat) => (
-              <CategoryCard
-                key={cat.slug}
-                slug={cat.slug}
-                title={cat.title}
-                description={cat.shortDescription}
-                icon={cat.icon}
-                variant="dark"
-              />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6 md:gap-8 auto-rows-fr">
+            {productCategories.map((cat, i) => {
+              // Bento layout on lg+:
+              // 0 (Gear Units)         -> tall left column (row-span-2)
+              // 1 (Electric Motors)    -> wide top-right (col-span-2)
+              // 2 (Drive Electronics)  -> bottom middle
+              // 3 (Complete Systems)   -> bottom right
+              let spanClass = "";
+              let featured = false;
+              if (i === 0) {
+                spanClass = "md:col-span-2 lg:col-span-1 lg:row-span-2";
+                featured = true;
+              } else if (i === 1) {
+                spanClass = "lg:col-span-2";
+              }
+              return (
+                <div key={cat.slug} className={spanClass}>
+                  <CategoryCard
+                    slug={cat.slug}
+                    title={cat.title}
+                    description={cat.shortDescription}
+                    icon={cat.icon}
+                    variant="dark"
+                    featured={featured}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

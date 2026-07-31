@@ -16,6 +16,7 @@ type Props = {
   icon: keyof typeof iconMap;
   cta?: string;
   variant?: "light" | "dark";
+  featured?: boolean;
 };
 
 export default function CategoryCard({
@@ -25,6 +26,7 @@ export default function CategoryCard({
   icon,
   cta = "View range",
   variant = "light",
+  featured = false,
 }: Props) {
   const Icon = iconMap[icon];
   const isDark = variant === "dark";
@@ -36,25 +38,37 @@ export default function CategoryCard({
     ? "text-lg md:text-xl text-white"
     : "text-lg md:text-xl text-brand-black";
   const descClass = isDark
-    ? "text-sm text-neutral-300 leading-relaxed flex-1"
+    ? "text-sm text-neutral-300 leading-relaxed"
     : "text-sm text-neutral-600 leading-relaxed flex-1";
+
+  const imageWrapClass = featured
+    ? "relative flex-1 min-h-[280px]"
+    : "relative";
 
   return (
     <Link href={`/products/${slug}`} className={wrapperClass}>
-      <div className="relative">
-        <ImagePlaceholder
-          alt={`${title} product photograph`}
-          aspect="16/9"
-          rounded="rounded-none"
-          label={title}
-        />
+      <div className={imageWrapClass}>
+        {featured ? (
+          <div
+            role="img"
+            aria-label={`${title} product photograph`}
+            className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-white/[0.02]"
+          />
+        ) : (
+          <ImagePlaceholder
+            alt={`${title} product photograph`}
+            aspect="16/9"
+            rounded="rounded-none"
+            label={title}
+          />
+        )}
         {isDark && (
           <span className="absolute top-4 left-4 inline-flex items-center justify-center w-11 h-11 rounded-lg bg-brand-orange text-white shadow-card">
             <Icon className="w-5 h-5" />
           </span>
         )}
       </div>
-      <div className="p-6 flex flex-col gap-3 flex-1">
+      <div className="p-6 flex flex-col gap-3">
         {!isDark && (
           <div className="flex items-center gap-3">
             <span className="chip-icon">
