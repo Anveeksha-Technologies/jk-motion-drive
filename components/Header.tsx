@@ -3,10 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowRight, Bolt, ChevronDown, Cog, Cpu, Layers, Menu, X, type LucideIcon } from "lucide-react";
 import Logo from "./Logo";
 import { primaryNav } from "@/lib/site";
 import { productCategories } from "@/lib/products";
+
+const productIconMap: Record<string, LucideIcon> = {
+  gear: Cog,
+  bolt: Bolt,
+  chip: Cpu,
+  layers: Layers,
+};
 
 export default function Header() {
   const pathname = usePathname();
@@ -63,17 +70,38 @@ export default function Header() {
                     <ChevronDown className="w-4 h-4" />
                   </Link>
                   {productsOpen && (
-                    <div className="absolute left-0 top-full pt-2 w-72">
-                      <div className="rounded-xl border border-neutral-200 bg-white shadow-card-hover py-2">
-                        {productCategories.map((cat) => (
-                          <Link
-                            key={cat.slug}
-                            href={`/products/${cat.slug}`}
-                            className="block px-4 py-2.5 text-sm font-medium text-neutral-800 hover:bg-brand-orange-tint hover:text-brand-orange"
-                          >
-                            {cat.title}
-                          </Link>
-                        ))}
+                    <div className="absolute right-0 top-full pt-3 w-[92vw] max-w-[720px]">
+                      <div className="rounded-2xl border border-neutral-200 bg-white shadow-card-hover overflow-hidden">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4">
+                          {productCategories.map((cat) => {
+                            const CIcon = productIconMap[cat.icon] ?? Cog;
+                            return (
+                              <Link
+                                key={cat.slug}
+                                href={`/products/${cat.slug}`}
+                                className="group flex items-start gap-3 p-3 rounded-xl hover:bg-neutral-50 transition-colors"
+                              >
+                                <span className="w-14 h-14 shrink-0 rounded-lg bg-brand-orange-tint text-brand-orange flex items-center justify-center">
+                                  <CIcon className="w-6 h-6" />
+                                </span>
+                                <div className="min-w-0">
+                                  <div className="font-display uppercase text-sm md:text-[15px] text-brand-black leading-tight tracking-wide">
+                                    {cat.title}
+                                  </div>
+                                  <div className="mt-1 text-xs text-neutral-500 leading-snug">
+                                    {cat.dropdownBlurb}
+                                  </div>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                        <Link
+                          href="/products"
+                          className="flex items-center justify-center gap-2 bg-brand-black text-white py-3.5 text-sm font-semibold hover:bg-black transition-colors"
+                        >
+                          View all products <ArrowRight className="w-4 h-4" />
+                        </Link>
                       </div>
                     </div>
                   )}

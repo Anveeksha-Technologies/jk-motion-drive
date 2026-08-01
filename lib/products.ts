@@ -9,6 +9,7 @@ export type ProductCategory = {
   title: string;
   icon: "gear" | "bolt" | "chip" | "layers";
   shortDescription: string;
+  dropdownBlurb: string;
   heroDescription: string;
   subProducts: SubProduct[];
   keyFeatures: string[];
@@ -22,6 +23,8 @@ export const productCategories: ProductCategory[] = [
     icon: "gear",
     shortDescription:
       "Helical inline, parallel shaft, bevel and worm geared motors, plus heavy-duty industrial gear units.",
+    dropdownBlurb:
+      "Helical, bevel, worm & inline geared motors + heavy-duty gear units",
     heroDescription:
       "Precision geared motors and industrial gear units engineered for high torque density, long service life and quiet, efficient running across the toughest duty cycles.",
     subProducts: [
@@ -58,6 +61,8 @@ export const productCategories: ProductCategory[] = [
     icon: "bolt",
     shortDescription:
       "Asynchronous and synchronous AC motors, including high-efficiency IE5+ and explosion-proof options.",
+    dropdownBlurb:
+      "Asynchronous, synchronous IE5+ and explosion-proof AC motors",
     heroDescription:
       "A complete range of AC motors built for efficiency and reliability — from standard asynchronous machines to synchronous IE5+ drives that cut energy cost across their service life.",
     subProducts: [
@@ -84,6 +89,8 @@ export const productCategories: ProductCategory[] = [
     icon: "chip",
     shortDescription:
       "Frequency inverters and control-cabinet or decentralized drive solutions for precise motion control.",
+    dropdownBlurb:
+      "Frequency inverters — cabinet, decentralized & field-mount",
     heroDescription:
       "Variable frequency drives and inverter solutions that deliver precise speed control, energy recovery and seamless integration — for control-cabinet and fully decentralized installation.",
     subProducts: [
@@ -110,6 +117,8 @@ export const productCategories: ProductCategory[] = [
     icon: "layers",
     shortDescription:
       "Packaged motor, gear and drive-electronics solutions optimised end-to-end for your application.",
+    dropdownBlurb:
+      "Packaged motor, gear & electronics — optimised end to end",
     heroDescription:
       "Fully engineered drive packages that combine motor, gear unit and electronics into a single optimised solution — reducing variants, simplifying maintenance and maximising uptime.",
     subProducts: [
