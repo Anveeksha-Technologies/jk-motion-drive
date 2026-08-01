@@ -50,3 +50,26 @@ export const whyChooseUs = [
     body: "Installation, commissioning, spares and service for the full life of your drive.",
   },
 ];
+
+export const coreValues = [
+  {
+    icon: "gem",
+    title: "Quality",
+    body: "Only genuine, warrantied products — no compromises on what we supply.",
+  },
+  {
+    icon: "shield-check",
+    title: "Reliability",
+    body: "Drives engineered to keep running, shift after shift, year after year.",
+  },
+  {
+    icon: "drafting-compass",
+    title: "Engineering Support",
+    body: "Real selection help from people who know drives — before, during and after the sale.",
+  },
+  {
+    icon: "handshake",
+    title: "Customer-First",
+    body: "Your uptime and long-term outcomes matter more than any single transaction.",
+  },
+];

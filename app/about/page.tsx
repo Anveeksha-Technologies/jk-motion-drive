@@ -4,14 +4,14 @@ import FeatureIconCard from "@/components/FeatureIconCard";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
-import StatCounter from "@/components/StatCounter";
-import { stats, whyChooseUs } from "@/lib/site";
+import { coreValues, stats } from "@/lib/site";
 
 const partnerChecklist = [
   "Authorised sourcing with full warranty and product traceability",
   "In-house engineering to size the exact drive for your duty",
   "Core ranges held in local stock for fast delivery",
   "Installation, commissioning and on-site support",
+  "Genuine spares and lifecycle service to protect uptime",
 ];
 
 export default function AboutPage() {
@@ -22,6 +22,7 @@ export default function AboutPage() {
         badge="About Us"
         title="About JK Motion Drive"
         subtitle="A specialist supplier of engineered drive solutions — powering precision across Indian industry."
+        variant="dark"
       />
 
       {/* Company overview */}
@@ -30,25 +31,22 @@ export default function AboutPage() {
           <div>
             <span className="eyebrow">Company Overview</span>
             <h2 className="mt-3 heading-2 text-brand-black">Precision is our Standard</h2>
-            <div className="mt-6 space-y-4 body-lg">
+            <div className="mt-6 space-y-5 body-lg">
               <p>
                 JK Motion Drive is a specialist supplier of industrial power-transmission and
-                drive-control products — helping plants, OEMs and system integrators across India
-                get the right drive for every application.
+                motion-control products. We bring together gear units, geared motors, electric
+                motors and drive electronics into engineered solutions that keep our customers
+                running.
               </p>
               <p>
-                We combine deep application engineering with ready stock of core ranges, so our
-                customers get accurate selection, quick delivery and dependable service — from
-                first enquiry through commissioning and lifecycle support.
-              </p>
-              <p>
-                Whether it is a single geared motor for a conveyor or a complete drive package for
-                a new production line, our team stands behind every drive we supply.
+                &ldquo;Powering Precision&rdquo; isn&apos;t just our tagline — it&apos;s how we
+                work. Every drive we supply is selected for its exact duty, delivered on time from
+                stock, and backed by hands-on engineering support long after the sale.
               </p>
             </div>
           </div>
           <ImagePlaceholder
-            alt="Precision tools and drive components on a workbench"
+            alt="Precision tools and technical drawings on a workbench"
             aspect="4/3"
             label="Company overview"
           />
@@ -58,24 +56,25 @@ export default function AboutPage() {
       {/* Vision & Mission */}
       <section className="section bg-neutral-50">
         <div className="container-x">
-          <SectionHeading eyebrow="Direction" title="Vision & Mission" align="center" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="card p-8 flex flex-col gap-4">
-              <span className="chip-icon">
+            <div className="relative rounded-2xl bg-white border border-neutral-200 shadow-card p-8 overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-1 bg-brand-orange" aria-hidden />
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-brand-orange-tint text-brand-orange">
                 <Eye className="w-5 h-5" />
               </span>
-              <h3 className="heading-3 text-brand-black">Our Vision</h3>
-              <p className="text-neutral-600 leading-relaxed">
+              <h3 className="mt-5 heading-3 text-brand-black">Our Vision</h3>
+              <p className="mt-4 text-neutral-600 leading-relaxed">
                 To be India&apos;s most trusted partner for engineered drive solutions — the first
                 name industry thinks of when precision, efficiency and uptime matter.
               </p>
             </div>
-            <div className="card p-8 flex flex-col gap-4">
-              <span className="chip-icon">
+            <div className="relative rounded-2xl bg-white border border-neutral-200 shadow-card p-8 overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-1 bg-brand-orange" aria-hidden />
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-brand-orange-tint text-brand-orange">
                 <Target className="w-5 h-5" />
               </span>
-              <h3 className="heading-3 text-brand-black">Our Mission</h3>
-              <p className="text-neutral-600 leading-relaxed">
+              <h3 className="mt-5 heading-3 text-brand-black">Our Mission</h3>
+              <p className="mt-4 text-neutral-600 leading-relaxed">
                 To deliver the right drive for every application — genuine, efficient and
                 well-supported — through deep engineering knowledge, ready stock and dependable
                 service.
@@ -85,17 +84,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4-icon feature row */}
+      {/* Core Values */}
       <section className="section bg-white">
         <div className="container-x">
           <SectionHeading
-            eyebrow="What We Stand For"
-            title="The Principles Behind Every Drive"
+            eyebrow="What Drives Us"
+            title="Our Core Values"
             align="center"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyChooseUs.map((f) => (
-              <FeatureIconCard key={f.title} {...f} />
+            {coreValues.map((v) => (
+              <FeatureIconCard key={v.title} {...v} />
             ))}
           </div>
         </div>
@@ -136,9 +135,15 @@ export default function AboutPage() {
             {stats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8"
+                className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 text-center"
               >
-                <StatCounter value={s.value} suffix={s.suffix} label={s.label} />
+                <div className="font-display text-4xl md:text-5xl text-brand-orange leading-none">
+                  {s.value}
+                  <span>{s.suffix}</span>
+                </div>
+                <div className="mt-3 text-xs md:text-sm font-semibold uppercase tracking-wider text-neutral-300">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>

@@ -1,5 +1,8 @@
 import {
   BadgeCheck,
+  DraftingCompass,
+  Gem,
+  Handshake,
   Heart,
   Headset,
   LifeBuoy,
@@ -21,6 +24,9 @@ const iconMap: Record<string, LucideIcon> = {
   "pencil-ruler": PencilRuler,
   truck: Truck,
   "life-buoy": LifeBuoy,
+  gem: Gem,
+  "drafting-compass": DraftingCompass,
+  handshake: Handshake,
 };
 
 type Props = {
