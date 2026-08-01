@@ -21,12 +21,24 @@ export default function Header() {
   const [productsOpen, setProductsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 4);
+      const doc = document.documentElement;
+      const maxScroll = doc.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? Math.min(1, Math.max(0, y / maxScroll)) : 0;
+      setScrollProgress(progress);
+    };
     onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -44,7 +56,14 @@ export default function Header() {
         scrolled ? "shadow-sm" : ""
       }`}
     >
-      <div className="h-[3px] w-full bg-brand-orange" />
+      {/* Scroll progress bar — fills left-to-right as user scrolls */}
+      <div className="h-[3px] w-full bg-brand-orange/15 relative overflow-hidden">
+        <div
+          className="absolute inset-y-0 left-0 bg-brand-orange"
+          style={{ width: `${scrollProgress * 100}%` }}
+          aria-hidden
+        />
+      </div>
       <div className="container-x flex items-center justify-between h-16 md:h-20">
         <Logo />
 
