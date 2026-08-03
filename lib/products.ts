@@ -78,9 +78,21 @@ export const productCategories: ProductCategory[] = [
     heroDescription:
       "A complete range of AC motors built for efficiency and reliability — from standard asynchronous machines to synchronous IE5+ drives that cut energy cost across their service life.",
     subProducts: [
-      { title: "Asynchronous AC Motors", tags: ["Standard", "Robust"] },
-      { title: "Synchronous AC Motors", tags: ["IE5+", "Energy-saving"] },
-      { title: "Explosion-Proof Motors", tags: ["ATEX", "Certified"] },
+      {
+        title: "Asynchronous AC Motors",
+        subtitle: "IE3 · 0.12–200 kW",
+        tags: ["Standard", "Robust"],
+      },
+      {
+        title: "Synchronous AC Motors",
+        subtitle: "IE5+ efficiency class",
+        tags: ["IE5+", "Energy-saving"],
+      },
+      {
+        title: "Explosion-Proof Motors",
+        subtitle: "ATEX / hazardous areas",
+        tags: ["ATEX", "Certified"],
+      },
       {
         title: "Brake Motors",
         subtitle: "Fast, precise stopping",
@@ -106,9 +118,21 @@ export const productCategories: ProductCategory[] = [
     heroDescription:
       "Variable frequency drives and inverter solutions that deliver precise speed control, energy recovery and seamless integration — for control-cabinet and fully decentralized installation.",
     subProducts: [
-      { title: "Control-Cabinet Frequency Inverters", tags: ["Cabinet", "Scalable"] },
-      { title: "Decentralized Drive Inverters", tags: ["Decentralized", "IP66"] },
-      { title: "Field-Mount Variable Frequency Drives", tags: ["Field-mount", "Plug-in"] },
+      {
+        title: "Control-Cabinet Frequency Inverters",
+        subtitle: "Scalable · cabinet-mount",
+        tags: ["Cabinet", "Scalable"],
+      },
+      {
+        title: "Decentralized Drive Inverters",
+        subtitle: "IP66 · field-installed",
+        tags: ["Decentralized", "IP66"],
+      },
+      {
+        title: "Field-Mount Variable Frequency Drives",
+        subtitle: "Plug-in · near the motor",
+        tags: ["Field-mount", "Plug-in"],
+      },
       {
         title: "Motor-Mounted Starters",
         subtitle: "Direct & reversing",
@@ -134,9 +158,21 @@ export const productCategories: ProductCategory[] = [
     heroDescription:
       "Fully engineered drive packages that combine motor, gear unit and electronics into a single optimised solution — reducing variants, simplifying maintenance and maximising uptime.",
     subProducts: [
-      { title: "Integrated Motor + Drive Packages", tags: ["Integrated", "Efficient"] },
-      { title: "Conveyor Drive Packages", tags: ["Turnkey", "Fast install"] },
-      { title: "Overhead & Screw Conveyor Kits", tags: ["Kit", "Matched"] },
+      {
+        title: "Integrated Motor + Drive Packages",
+        subtitle: "Motor + drive · one unit",
+        tags: ["Integrated", "Efficient"],
+      },
+      {
+        title: "Conveyor Drive Packages",
+        subtitle: "Turnkey · fast install",
+        tags: ["Turnkey", "Fast install"],
+      },
+      {
+        title: "Overhead & Screw Conveyor Kits",
+        subtitle: "Matched drive kit",
+        tags: ["Kit", "Matched"],
+      },
       {
         title: "Application Drive Kits",
         subtitle: "Reduced variants",
