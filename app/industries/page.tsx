@@ -11,6 +11,7 @@ export default function IndustriesPage() {
         badge="Industries"
         title="Industries We Serve"
         subtitle="Our drive technology powers more than 100 industries — here's where we deliver value."
+        variant="dark"
       />
 
       <section className="section bg-white">
