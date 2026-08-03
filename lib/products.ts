@@ -28,9 +28,21 @@ export const productCategories: ProductCategory[] = [
     heroDescription:
       "Precision geared motors and industrial gear units engineered for high torque density, long service life and quiet, efficient running across the toughest duty cycles.",
     subProducts: [
-      { title: "Helical Inline Geared Motors", tags: ["Inline", "High efficiency"] },
-      { title: "Parallel Shaft Geared Motors", tags: ["Space-saving", "Shaft-mount"] },
-      { title: "Helical Bevel Geared Motors", tags: ["Right-angle", "Rugged"] },
+      {
+        title: "Helical Inline Geared Motors",
+        subtitle: "0.12–200 kW · up to 20,000 Nm",
+        tags: ["Inline", "High efficiency"],
+      },
+      {
+        title: "Parallel Shaft Geared Motors",
+        subtitle: "Compact · shaft-mounted",
+        tags: ["Space-saving", "Shaft-mount"],
+      },
+      {
+        title: "Helical Bevel Geared Motors",
+        subtitle: "Right-angle · high ratios",
+        tags: ["Right-angle", "Rugged"],
+      },
       {
         title: "Worm Geared Motors",
         subtitle: "Quiet, economical right-angle",

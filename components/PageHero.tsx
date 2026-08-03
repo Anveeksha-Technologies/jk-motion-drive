@@ -6,7 +6,7 @@ type Crumb = { label: string; href?: string };
 
 type Props = {
   badge?: string;
-  title: string;
+  title: ReactNode;
   subtitle?: string;
   crumbs?: Crumb[];
   children?: ReactNode;
