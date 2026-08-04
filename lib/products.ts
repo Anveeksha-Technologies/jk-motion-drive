@@ -120,17 +120,17 @@ export const productCategories: ProductCategory[] = [
     subProducts: [
       {
         title: "Control-Cabinet Frequency Inverters",
-        subtitle: "Scalable · cabinet-mount",
+        subtitle: "0.25–160 kW",
         tags: ["Cabinet", "Scalable"],
       },
       {
         title: "Decentralized Drive Inverters",
-        subtitle: "IP66 · field-installed",
+        subtitle: "Motor- or wall-mount · IP66",
         tags: ["Decentralized", "IP66"],
       },
       {
         title: "Field-Mount Variable Frequency Drives",
-        subtitle: "Plug-in · near the motor",
+        subtitle: "On-machine control",
         tags: ["Field-mount", "Plug-in"],
       },
       {
