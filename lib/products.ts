@@ -160,17 +160,17 @@ export const productCategories: ProductCategory[] = [
     subProducts: [
       {
         title: "Integrated Motor + Drive Packages",
-        subtitle: "Motor + drive · one unit",
+        subtitle: "Single optimised unit",
         tags: ["Integrated", "Efficient"],
       },
       {
         title: "Conveyor Drive Packages",
-        subtitle: "Turnkey · fast install",
+        subtitle: "Pre-configured for lines",
         tags: ["Turnkey", "Fast install"],
       },
       {
         title: "Overhead & Screw Conveyor Kits",
-        subtitle: "Matched drive kit",
+        subtitle: "Application-matched",
         tags: ["Kit", "Matched"],
       },
       {
