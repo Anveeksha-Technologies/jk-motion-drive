@@ -1,33 +1,45 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Cog } from "lucide-react";
+
+// Client-supplied brand lockup (gear mark + JK MOTION DRIVE wordmark).
+// Source of truth: brand/jk-motion-logo-original.svg
+// The dark-background variant is a knockout render of the same lockup.
+const LOGO_ASPECT = 353 / 144; // ≈ 2.451
 
 type Props = {
+  /** "light" = for light backgrounds (header), "dark" = for dark backgrounds (footer) */
   variant?: "light" | "dark";
-  withTagline?: boolean;
+  /** Rendered height in px; width is derived from the lockup aspect ratio. */
+  height?: number;
+  className?: string;
 };
 
-export default function Logo({ variant = "light", withTagline = false }: Props) {
-  const wordTop = variant === "light" ? "text-brand-black" : "text-white";
+export default function Logo({
+  variant = "light",
+  height = 44,
+  className = "",
+}: Props) {
+  const src = variant === "dark" ? "/images/logo-light.webp" : "/images/logo.webp";
+  const width = Math.round(height * LOGO_ASPECT);
+
   return (
-    <Link href="/" className="inline-flex items-center gap-2.5" aria-label="JK Motion Drive — Home">
-      <span className="inline-flex items-center justify-center w-10 h-10 rounded-md bg-brand-orange text-white">
-        <Cog className="w-6 h-6" strokeWidth={2.5} />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-xl md:text-2xl tracking-wide">
-          <span className="text-brand-orange">JK</span>{" "}
-          <span className={wordTop}>MOTION DRIVE</span>
-        </span>
-        {withTagline && (
-          <span
-            className={`text-[10px] font-semibold uppercase tracking-[0.22em] mt-1 ${
-              variant === "light" ? "text-neutral-500" : "text-neutral-400"
-            }`}
-          >
-            Powering Precision
-          </span>
-        )}
-      </span>
+    <Link
+      href="/"
+      className={`inline-flex ${className}`}
+      aria-label="JK Motion Drive — Home"
+    >
+      {/* The lockup already contains the "Powering Precision" tagline, so no
+          separate tagline text is rendered alongside it. */}
+      <Image
+        src={src}
+        alt="JK Motion Drive"
+        width={width}
+        height={height}
+        priority
+        sizes={`${width}px`}
+        className="object-contain"
+        style={{ height, width }}
+      />
     </Link>
   );
 }
