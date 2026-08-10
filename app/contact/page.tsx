@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import { site } from "@/lib/site";
 
@@ -84,13 +84,16 @@ export default function ContactPage() {
               </a>
             </div>
 
-            {/* Map placeholder */}
-            <div className="relative rounded-2xl overflow-hidden">
-              <ImagePlaceholder
-                alt="Warehouse / facility location — map will embed here"
-                aspect="4/3"
-                rounded="rounded-2xl"
-                label="Map — client to embed"
+            {/* Facility photo standing in for the map.
+                TODO: client to supply the address so this can be swapped for a
+                Google Maps embed. */}
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-100">
+              <Image
+                src="/images/contact-map.webp"
+                alt="JK Motion Drive warehouse and stock facility"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
               />
               <div className="absolute top-3 left-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-brand-black shadow-card">
                 <MapPin className="w-3.5 h-3.5 text-brand-orange" />
