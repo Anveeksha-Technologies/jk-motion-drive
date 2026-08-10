@@ -1,9 +1,8 @@
 import { stats } from "@/lib/site";
 
-// TODO: client to supply the industrial background photograph.
-// Drop it at public/images/stats-bg.jpg and set STATS_BG to its path —
-// until then the band falls back to a clean dark industrial texture.
-const STATS_BG: string | null = null;
+// Client-supplied industrial background. Source: /product-images/stats-bg.jpg
+// Set to null to fall back to the plain dark industrial texture below.
+const STATS_BG: string | null = "/images/stats-bg.webp";
 
 export default function StatsBar() {
   return (
