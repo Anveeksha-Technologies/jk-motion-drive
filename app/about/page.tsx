@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Check, Eye, Target } from "lucide-react";
 import CtaBanner from "@/components/CtaBanner";
 import FeatureIconCard from "@/components/FeatureIconCard";
@@ -45,11 +46,15 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <ImagePlaceholder
-            alt="Precision tools and technical drawings on a workbench"
-            aspect="4/3"
-            label="Company overview"
-          />
+          <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100">
+            <Image
+              src="/images/about-overview.webp"
+              alt="Precision tools and technical drawings on a workbench"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
