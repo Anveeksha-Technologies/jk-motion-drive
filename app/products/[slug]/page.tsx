@@ -5,6 +5,7 @@ import CtaBanner from "@/components/CtaBanner";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import { getCategory, productCategories } from "@/lib/products";
+import { getCategoryImage, getSubProductImage } from "@/lib/productImages";
 
 const iconMap = {
   gear: Cog,
@@ -57,14 +58,28 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
         <div className="container-x">
           <h2 className="heading-2 text-brand-black mb-10 md:mb-14">Product Range</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {category.subProducts.map((p) => (
+            {category.subProducts.map((p) => {
+              const img = getSubProductImage(p.title);
+              return (
               <div key={p.title} className="card flex flex-col h-full">
-                <ImagePlaceholder
-                  alt={`${p.title} product`}
-                  aspect="4/3"
-                  rounded="rounded-none"
-                  label={p.title}
-                />
+                {img ? (
+                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-900">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={img}
+                      alt={`${p.title} product`}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <ImagePlaceholder
+                    alt={`${p.title} product`}
+                    aspect="4/3"
+                    rounded="rounded-none"
+                    label={p.title}
+                  />
+                )}
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <h3 className="text-lg text-brand-black">{p.title}</h3>
                   {p.subtitle && (
@@ -82,7 +97,8 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
                   </Link>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -139,6 +155,7 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
             {productCategories.map((c) => {
               const CIcon = iconMap[c.icon];
               const isCurrent = c.slug === category.slug;
+              const cImg = getCategoryImage(c.slug);
               return (
                 <Link
                   key={c.slug}
@@ -149,9 +166,21 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
                       : "border-neutral-200 bg-white hover:border-brand-orange hover:shadow-card-hover"
                   }`}
                 >
-                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-brand-orange-tint text-brand-orange shrink-0">
-                    <CIcon className="w-5 h-5" />
-                  </span>
+                  {cImg ? (
+                    <span className="relative w-12 h-12 rounded-lg overflow-hidden bg-neutral-900 shrink-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={cImg}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-brand-orange-tint text-brand-orange shrink-0">
+                      <CIcon className="w-5 h-5" />
+                    </span>
+                  )}
                   <h3 className="text-sm md:text-base text-brand-black leading-tight">
                     {c.title}
                   </h3>

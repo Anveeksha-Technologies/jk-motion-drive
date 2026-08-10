@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Bolt, Cog, Cpu, Layers } from "lucide-react";
 import ImagePlaceholder from "./ImagePlaceholder";
+import { getCategoryImage } from "@/lib/productImages";
 
 const iconMap = {
   gear: Cog,
@@ -30,6 +31,7 @@ export default function CategoryCard({
 }: Props) {
   const Icon = iconMap[icon];
   const isDark = variant === "dark";
+  const image = getCategoryImage(slug);
 
   const wrapperClass = isDark
     ? "group flex flex-col h-full rounded-xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/[0.08] hover:border-white/20 transition-colors"
@@ -44,12 +46,29 @@ export default function CategoryCard({
   return (
     <Link href={`/products/${slug}`} className={wrapperClass}>
       <div className="relative">
-        <ImagePlaceholder
-          alt={`${title} product photograph`}
-          aspect={featured ? "4/3" : "16/9"}
-          rounded="rounded-none"
-          label={title}
-        />
+        {image ? (
+          <div
+            className="relative w-full overflow-hidden bg-neutral-900"
+            style={{ aspectRatio: featured ? "4 / 3" : "16 / 9" }}
+          >
+            {/* Product artwork is SVG, so it is served directly rather than
+                through next/image (which only optimises raster formats). */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={image}
+              alt={`${title} product`}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        ) : (
+          <ImagePlaceholder
+            alt={`${title} product photograph`}
+            aspect={featured ? "4/3" : "16/9"}
+            rounded="rounded-none"
+            label={title}
+          />
+        )}
         {isDark && (
           <span className="absolute top-4 left-4 inline-flex items-center justify-center w-11 h-11 rounded-lg bg-brand-orange text-white shadow-card">
             <Icon className="w-5 h-5" />

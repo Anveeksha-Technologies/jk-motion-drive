@@ -7,6 +7,7 @@ import { ArrowRight, Bolt, ChevronDown, Cog, Cpu, Layers, Menu, X, type LucideIc
 import Logo from "./Logo";
 import { primaryNav } from "@/lib/site";
 import { productCategories } from "@/lib/products";
+import { getCategoryImage } from "@/lib/productImages";
 
 const productIconMap: Record<string, LucideIcon> = {
   gear: Cog,
@@ -94,15 +95,28 @@ export default function Header() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4">
                           {productCategories.map((cat) => {
                             const CIcon = productIconMap[cat.icon] ?? Cog;
+                            const catImg = getCategoryImage(cat.slug);
                             return (
                               <Link
                                 key={cat.slug}
                                 href={`/products/${cat.slug}`}
                                 className="group flex items-start gap-3 p-3 rounded-xl hover:bg-neutral-50 transition-colors"
                               >
-                                <span className="w-14 h-14 shrink-0 rounded-lg bg-brand-orange-tint text-brand-orange flex items-center justify-center">
-                                  <CIcon className="w-6 h-6" />
-                                </span>
+                                {catImg ? (
+                                  <span className="relative w-14 h-14 shrink-0 rounded-lg overflow-hidden bg-neutral-900">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                      src={catImg}
+                                      alt=""
+                                      loading="lazy"
+                                      className="absolute inset-0 w-full h-full object-cover"
+                                    />
+                                  </span>
+                                ) : (
+                                  <span className="w-14 h-14 shrink-0 rounded-lg bg-brand-orange-tint text-brand-orange flex items-center justify-center">
+                                    <CIcon className="w-6 h-6" />
+                                  </span>
+                                )}
                                 <div className="min-w-0">
                                   <div className="font-display uppercase text-sm md:text-[15px] text-brand-black leading-tight tracking-wide">
                                     {cat.title}
