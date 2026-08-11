@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Check, Eye, Target } from "lucide-react";
 import CtaBanner from "@/components/CtaBanner";
 import FeatureIconCard from "@/components/FeatureIconCard";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import { coreValues, stats } from "@/lib/site";
@@ -107,15 +106,14 @@ export default function AboutPage() {
 
       {/* Why Partner With Us — dark section */}
       <section className="relative isolate overflow-hidden bg-brand-black text-white">
-        <div className="absolute inset-0 -z-10 opacity-30">
-          <ImagePlaceholder
-            alt="Industrial plant background"
-            aspect="21/9"
-            rounded="rounded-none"
-            className="h-full !border-0"
-            label="Industrial background"
-          />
-        </div>
+        <Image
+          src="/images/contact-map.webp"
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          className="absolute inset-0 -z-10 object-cover opacity-30"
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/80 to-black/70" />
         <div className="container-x py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
