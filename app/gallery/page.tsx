@@ -1,18 +1,22 @@
+import Image from "next/image";
 import { Download, FileText } from "lucide-react";
 import CtaBanner from "@/components/CtaBanner";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 
-const galleryItems = [
-  "Precision welding",
-  "Robotic assembly line",
-  "Drive commissioning",
-  "Drive electronics",
-  "Inverter assembly",
-  "Warehouse logistics",
-  "Plant installation",
-  "Machined components",
+// TODO: client to supply the remaining gallery photographs. Add the path to
+// `image` as each one arrives — tiles without an image fall back to a
+// placeholder, so the grid stays intact in the meantime.
+const galleryItems: { caption: string; image?: string }[] = [
+  { caption: "Precision welding" },
+  { caption: "Robotic assembly line", image: "/images/stats-bg.webp" },
+  { caption: "Drive commissioning" },
+  { caption: "Drive electronics" },
+  { caption: "Inverter assembly" },
+  { caption: "Warehouse logistics", image: "/images/contact-map.webp" },
+  { caption: "Plant installation" },
+  { caption: "Machined components", image: "/images/about-overview.webp" },
 ];
 
 // TODO: client to attach final PDF files and confirm sizes.
@@ -40,14 +44,26 @@ export default function GalleryPage() {
         <div className="container-x">
           <SectionHeading eyebrow="Gallery" title="Products & Installations" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {galleryItems.map((caption) => (
+            {galleryItems.map(({ caption, image }) => (
               <div key={caption} className="relative group overflow-hidden rounded-xl">
-                <ImagePlaceholder
-                  alt={caption}
-                  aspect="4/3"
-                  rounded="rounded-xl"
-                  label={caption}
-                />
+                {image ? (
+                  <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl bg-neutral-900">
+                    <Image
+                      src={image}
+                      alt={caption}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 320px"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <ImagePlaceholder
+                    alt={caption}
+                    aspect="4/3"
+                    rounded="rounded-xl"
+                    label={caption}
+                  />
+                )}
                 <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
                   <p className="text-white text-sm font-semibold uppercase tracking-wide">
                     {caption}
