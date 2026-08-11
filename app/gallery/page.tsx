@@ -15,7 +15,7 @@ const galleryItems: { caption: string; image?: string }[] = [
   { caption: "Drive electronics" },
   { caption: "Inverter assembly" },
   { caption: "Warehouse logistics", image: "/images/contact-map.webp" },
-  { caption: "Plant installation" },
+  { caption: "Plant installation", image: "/images/gallery-plant-installation.webp" },
   { caption: "Machined components", image: "/images/about-overview.webp" },
 ];
 
