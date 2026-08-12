@@ -5,13 +5,12 @@ import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 
-// TODO: client to supply the remaining gallery photographs. Add the path to
-// `image` as each one arrives — tiles without an image fall back to a
-// placeholder, so the grid stays intact in the meantime.
+// `image` is optional: a tile without one falls back to a placeholder, so new
+// captions can be added ahead of their photography.
 const galleryItems: { caption: string; image?: string }[] = [
-  { caption: "Precision welding" },
+  { caption: "Precision welding", image: "/images/gallery-precision-welding.webp" },
   { caption: "Robotic assembly line", image: "/images/stats-bg.webp" },
-  { caption: "Drive commissioning" },
+  { caption: "Drive commissioning", image: "/images/gallery-drive-commissioning.webp" },
   { caption: "Drive electronics", image: "/images/gallery-drive-electronics.webp" },
   { caption: "Inverter assembly", image: "/images/gallery-inverter-assembly.webp" },
   { caption: "Warehouse logistics", image: "/images/contact-map.webp" },
