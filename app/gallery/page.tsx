@@ -13,7 +13,7 @@ const galleryItems: { caption: string; image?: string }[] = [
   { caption: "Robotic assembly line", image: "/images/stats-bg.webp" },
   { caption: "Drive commissioning" },
   { caption: "Drive electronics", image: "/images/gallery-drive-electronics.webp" },
-  { caption: "Inverter assembly" },
+  { caption: "Inverter assembly", image: "/images/gallery-inverter-assembly.webp" },
   { caption: "Warehouse logistics", image: "/images/contact-map.webp" },
   { caption: "Plant installation", image: "/images/gallery-plant-installation.webp" },
   { caption: "Machined components", image: "/images/about-overview.webp" },
