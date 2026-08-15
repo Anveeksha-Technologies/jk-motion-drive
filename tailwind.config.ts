@@ -39,10 +39,18 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        // Slow Ken Burns push on the hero backdrop. Runs once on load and
+        // holds the final scale (see `forwards`) so the image settles rather
+        // than snapping back.
+        "hero-zoom": {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.12)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out forwards",
         marquee: "marquee 40s linear infinite",
+        "hero-zoom": "hero-zoom 5s ease-out forwards",
       },
     },
   },
