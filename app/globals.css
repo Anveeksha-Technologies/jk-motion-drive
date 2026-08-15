@@ -11,6 +11,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Respect the OS "reduce motion" setting: the hero holds its final scale
+   immediately instead of animating, and smooth scrolling is dropped. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-hero-zoom {
+    animation: none;
+    transform: scale(1.12);
+  }
+}
+
 body {
   font-family: var(--font-sans);
   color: #1A1A1A;

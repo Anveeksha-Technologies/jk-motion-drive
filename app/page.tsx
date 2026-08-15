@@ -112,7 +112,7 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center animate-hero-zoom"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
         </div>
