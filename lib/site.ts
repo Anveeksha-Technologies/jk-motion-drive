@@ -1,13 +1,25 @@
-// TODO: client to provide real contact details, replace bracketed values.
+// Contact details as supplied by the client (company profile, Aug 2026).
+//
+// Deliberately NOT stored here, and not to be added: banking details, PAN and
+// proprietor's personal identifiers. Those appear on the client's profile
+// document because it is handed to buyers directly; publishing them would let
+// anyone impersonate the company on invoices.
 export const site = {
   name: "JK Motion Drive",
   tagline: "Powering Precision",
-  address: "[Address line 1], [City], India",
-  phone: "[+91 00000 00000]",
-  phoneHref: "tel:+910000000000",
-  email: "[info@jkmotiondrive.com]",
-  emailHref: "mailto:info@jkmotiondrive.com",
-  whatsapp: "https://wa.me/910000000000",
+  /** Exact wording supplied by the client — do not paraphrase. */
+  partner: "Authorised Channel Partner of NORD DRIVESYSTEMS",
+  /** Corporate / works address — where customers actually visit. */
+  address:
+    "24, Gajanan Industrial Estate, Sardar Patel Ring Road, Near Hathijan Circle Road, Ahmedabad – 382445, Gujarat, India",
+  /** Registered (billing) address. Shown on Contact beneath the works address. */
+  registeredAddress:
+    "3, Krishna Bungalows Part – 1, B/H Anand Party Plot, B/H Tirupati Society, Opposite Punchwati Bungalows, New Ranip, Ahmedabad – 382470, Gujarat, India",
+  phone: "+91 9898 464 465",
+  phoneHref: "tel:+919898464465",
+  email: "sales@jkmotiondrive.com",
+  emailHref: "mailto:sales@jkmotiondrive.com",
+  whatsapp: "https://wa.me/919898464465",
   hours: "Mon–Sat, 9:30 – 18:30",
   hoursLong: "Mon–Sat, 9:30 AM – 6:30 PM",
 };
