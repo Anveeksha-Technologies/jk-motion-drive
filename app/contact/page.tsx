@@ -31,6 +31,10 @@ export default function ContactPage() {
                   <div>
                     <div className="text-xs uppercase tracking-widest text-neutral-400">Address</div>
                     <div className="mt-1 text-sm text-white">{site.address}</div>
+                    <div className="mt-3 text-xs uppercase tracking-widest text-neutral-400">
+                      Registered Office
+                    </div>
+                    <div className="mt-1 text-sm text-neutral-300">{site.registeredAddress}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
