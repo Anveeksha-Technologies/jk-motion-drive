@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Bolt, Cog, Cpu, Layers } from "lucide-react";
 import ImagePlaceholder from "./ImagePlaceholder";
+import NordMark from "./NordMark";
 import { getCategoryImage } from "@/lib/productImages";
 
 const iconMap = {
@@ -56,10 +57,11 @@ export default function CategoryCard({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image}
-              alt={`${title} product`}
+              alt={`${title} — NORD DRIVESYSTEMS`}
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
             />
+            <NordMark />
           </div>
         ) : (
           <ImagePlaceholder

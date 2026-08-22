@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import ImagePlaceholder from "./ImagePlaceholder";
+import NordMark from "./NordMark";
 import type { SubProduct } from "@/lib/products";
 import { getSubProductImage } from "@/lib/productImages";
 
@@ -42,9 +43,9 @@ export default function ProductCard({ product }: { product: SubProduct }) {
           />
         )}
 
-        <span className="absolute top-3 left-3 inline-flex items-center rounded-md bg-black/70 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-          NORD DRIVESYSTEMS
-        </span>
+        {/* Only over real artwork — a brand mark on an empty placeholder slot
+            would imply photography that has not arrived yet. */}
+        {img && <NordMark />}
 
         {product.catalogue && (
           <span

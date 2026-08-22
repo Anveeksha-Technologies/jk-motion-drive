@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import CategoryCard from "@/components/CategoryCard";
 import CtaBanner from "@/components/CtaBanner";
+import NordMark from "@/components/NordMark";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import { productCategories } from "@/lib/products";
@@ -60,11 +61,7 @@ export default function ProductsIndexPage() {
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
-                  {/* The supplied renders have the NORD wordmark compressed
-                      away, so the brand is named in markup instead. */}
-                  <span className="absolute top-3 left-3 inline-flex items-center rounded-md bg-black/70 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                    NORD DRIVESYSTEMS
-                  </span>
+                  <NordMark />
                   {item.catalogue && (
                     <span className="absolute top-3 right-3 inline-flex items-center rounded-md bg-brand-orange px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-white">
                       {item.catalogue}
