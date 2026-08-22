@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Bolt, Check, Cog, Cpu, Layers } from "lucide-react";
@@ -134,13 +135,13 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
                   }`}
                 >
                   {cImg ? (
-                    <span className="relative w-12 h-12 rounded-lg overflow-hidden bg-neutral-900 shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                    <span className="relative w-12 h-12 rounded-lg overflow-hidden bg-white border border-neutral-200 shrink-0">
+                      <Image
                         src={cImg}
                         alt=""
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover"
+                        fill
+                        sizes="48px"
+                        className="object-contain p-1"
                       />
                     </span>
                   ) : (

@@ -3,18 +3,15 @@
  * of product artwork — the placement the client asked for, matching NORD's own
  * product photography.
  *
- * It sits on a white chip rather than directly on the artwork. Two reasons:
- * the supplied asset is an auto-trace of a bitmap and carries an opaque
- * #FDFDFD background plus a scatter of off-white noise shapes, which only
- * disappear against white; and the current renders have a near-black backdrop,
- * so an unbacked lockup would read as a grey smear. When white-background
- * renders replace the current artwork the chip becomes invisible against them
- * and the mark simply sits on the photo, as in the reference.
+ * The asset is an auto-trace carrying an opaque #FDFDFD panel plus a scatter of
+ * off-white noise shapes. Those only disappear against white — which is now the
+ * case, since the NORD renders are contained on white. No backing chip is
+ * needed any more; do not place this over a dark surface without one.
  */
 export default function NordMark({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`absolute bottom-3 right-3 inline-flex items-center rounded bg-white px-1.5 py-1 shadow-sm ${className}`}
+      className={`absolute bottom-3 right-3 z-10 inline-flex items-center ${className}`}
     >
       {/* Traced SVG, so served directly rather than through next/image.
           Sized by width, not height: the lockup is wider than it is tall

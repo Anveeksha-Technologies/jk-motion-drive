@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import CategoryCard from "@/components/CategoryCard";
@@ -53,13 +54,13 @@ export default function ProductsIndexPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {portfolio.map((item) => (
               <div key={item.id} className="card flex flex-col h-full">
-                <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-900">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-white">
+                  <Image
                     src={item.image}
                     alt={`${item.title} — NORD DRIVESYSTEMS`}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
+                    className="object-contain p-4"
                   />
                   <NordMark />
                   {item.catalogue && (

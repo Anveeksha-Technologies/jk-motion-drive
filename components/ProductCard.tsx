@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import ImagePlaceholder from "./ImagePlaceholder";
@@ -23,15 +24,16 @@ export default function ProductCard({ product }: { product: SubProduct }) {
     <article className="card flex flex-col h-full">
       <div className="relative">
         {img ? (
-          <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-900">
-            {/* Traced artwork embedded in SVG, so served directly rather than
-                through next/image, which does not optimise SVG. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="relative w-full aspect-[4/3] overflow-hidden bg-white">
+            {/* WebP with alpha, so it goes through next/image. object-contain,
+                not cover: these are product shots on transparent ground and
+                cropping would slice the casing. */}
+            <Image
               src={img}
               alt={`${product.title} — NORD DRIVESYSTEMS`}
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              sizes="(min-width: 1280px) 380px, (min-width: 640px) 45vw, 90vw"
+              className="object-contain p-4"
             />
           </div>
         ) : (

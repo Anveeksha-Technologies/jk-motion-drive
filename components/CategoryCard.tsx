@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Bolt, Cog, Cpu, Layers } from "lucide-react";
 import ImagePlaceholder from "./ImagePlaceholder";
@@ -49,17 +50,17 @@ export default function CategoryCard({
       <div className="relative">
         {image ? (
           <div
-            className="relative w-full overflow-hidden bg-neutral-900"
+            className="relative w-full overflow-hidden bg-white"
             style={{ aspectRatio: featured ? "4 / 3" : "16 / 9" }}
           >
-            {/* Product artwork is SVG, so it is served directly rather than
-                through next/image (which only optimises raster formats). */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            {/* NORD renders are WebP with alpha — contained on white, never
+                cropped, so the casing stays whole. */}
+            <Image
               src={image}
               alt={`${title} — NORD DRIVESYSTEMS`}
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              sizes="(min-width: 1024px) 400px, (min-width: 640px) 45vw, 90vw"
+              className="object-contain p-4"
             />
             <NordMark />
           </div>
