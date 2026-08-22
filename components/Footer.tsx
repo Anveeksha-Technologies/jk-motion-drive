@@ -10,7 +10,10 @@ export default function Footer() {
       <div className="container-x py-14 md:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <Logo variant="dark" height={52} />
-          <p className="mt-5 text-sm leading-relaxed text-neutral-400 max-w-xs">
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-brand-orange/40 bg-brand-orange/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-orange">
+            {site.partner}
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-neutral-400 max-w-xs">
             Engineered drive solutions — gear units, geared motors, electric motors and drive
             electronics, supplied and supported across India.
           </p>
