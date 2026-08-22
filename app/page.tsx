@@ -67,7 +67,7 @@ const testimonials = [
   },
   {
     quote:
-      "The IE5+ motors they specified paid for themselves in energy savings faster than we expected. Excellent support throughout.",
+      "The IE4 motors they specified paid for themselves in energy savings faster than we expected. Excellent support throughout.",
     initials: "OD",
     name: "[Client Name]",
     role: "[Operations Director, Food Processing]",
@@ -90,7 +90,7 @@ const heroStats = [
 const marqueeHighlights = [
   "Precision Engineering",
   "ISO-Grade Quality",
-  "IE5+ Efficiency",
+  "IE4 Efficiency",
   "Ready Stock",
   "Application Support",
   "Genuine Products",

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Bolt, Check, Cog, Cpu, Layers } from "lucide-react";
 import CtaBanner from "@/components/CtaBanner";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
+import ProductCard from "@/components/ProductCard";
 import { getCategory, productCategories } from "@/lib/products";
-import { getCategoryImage, getSubProductImage } from "@/lib/productImages";
+import { getCategoryImage } from "@/lib/productImages";
 
 const iconMap = {
   gear: Cog,
@@ -56,49 +56,16 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
       {/* Sub-products */}
       <section className="section bg-white">
         <div className="container-x">
-          <h2 className="heading-2 text-brand-black mb-10 md:mb-14">Product Range</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {category.subProducts.map((p) => {
-              const img = getSubProductImage(p.title);
-              return (
-              <div key={p.title} className="card flex flex-col h-full">
-                {img ? (
-                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-900">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={img}
-                      alt={`${p.title} product`}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </div>
-                ) : (
-                  <ImagePlaceholder
-                    alt={`${p.title} product`}
-                    aspect="4/3"
-                    rounded="rounded-none"
-                    label={p.title}
-                  />
-                )}
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <h3 className="text-lg text-brand-black">{p.title}</h3>
-                  {p.subtitle && (
-                    <p className="text-sm text-neutral-500 -mt-2">{p.subtitle}</p>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span key={t} className="tag-pill">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href="/contact" className="link-arrow mt-auto pt-2">
-                    Request pricing / datasheet <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-              );
-            })}
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-10 md:mb-14">
+            <h2 className="heading-2 text-brand-black">Product Range</h2>
+            <p className="text-sm text-neutral-500">
+              Specifications as published in NORD flyer F1300.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {category.subProducts.map((p) => (
+              <ProductCard key={p.title} product={p} />
+            ))}
           </div>
         </div>
       </section>

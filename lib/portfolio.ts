@@ -3,11 +3,11 @@ import { productImages } from "./productImages";
 /**
  * Full product portfolio — one entry per piece of client artwork.
  *
- * TODO: client to provide final product names, descriptions and specs.
- * The names below are provisional and describe what each render actually
- * shows, so the page reads correctly in demos. Replace `title`, `blurb`
- * and `tags` once the customer sends the real content — nothing else has
- * to change.
+ * Names, blurbs and catalogue references now come from the client-supplied
+ * NORD flyer F1300 (see lib/products.ts for the full transcription), so each
+ * tile names the family the render actually shows rather than a provisional
+ * description. Where a render shows a group of products, the entry names the
+ * range rather than pretending to be a single model.
  */
 export type PortfolioItem = {
   id: string;
@@ -15,73 +15,83 @@ export type PortfolioItem = {
   blurb: string;
   tags: [string, string];
   image: string;
+  /** NORD catalogue reference, shown as a badge on the tile. */
+  catalogue?: string;
   /** Product category this item belongs to, for grouping/filtering later. */
   category: string;
 };
 
 export const portfolio: PortfolioItem[] = [
   {
-    id: "helical-inline-geared-motor",
-    title: "Helical Inline Geared Motor",
-    blurb: "Inline output, high efficiency across the full load range.",
-    tags: ["Inline", "High efficiency"],
+    id: "unicase-helical-gear-units",
+    title: "UNICASE Helical Gear Units",
+    blurb: "Inline output to 26,000 Nm, long life and optimum sealing.",
+    tags: ["Inline", "UNICASE"],
     image: productImages.helicalInline,
+    catalogue: "G1000",
     category: "Gear Units & Geared Motors",
   },
   {
-    id: "parallel-shaft-geared-motor",
-    title: "Parallel Shaft Geared Motor",
-    blurb: "Space-saving shaft-mount design for tight installations.",
-    tags: ["Space-saving", "Shaft-mount"],
+    id: "unicase-parallel-shaft-gear-units",
+    title: "UNICASE Parallel Shaft Gear Units",
+    blurb: "Compact hollow- or solid-shaft design to 100,000 Nm.",
+    tags: ["Parallel shaft", "Compact"],
     image: productImages.parallelShaft,
+    catalogue: "G1000",
     category: "Gear Units & Geared Motors",
   },
   {
-    id: "helical-bevel-geared-motor",
-    title: "Helical Bevel Geared Motor",
-    blurb: "Rugged right-angle drive for high ratios and heavy duty.",
-    tags: ["Right-angle", "Rugged"],
+    id: "unicase-bevel-gear-units",
+    title: "UNICASE Bevel Gear Units",
+    blurb: "Right-angle cast-iron drive to 50,000 Nm and 200 kW.",
+    tags: ["Right-angle", "Cast iron"],
     image: productImages.helicalBevel,
+    catalogue: "G1000",
     category: "Gear Units & Geared Motors",
   },
   {
     id: "geared-motor-range",
-    title: "Geared Motor Range",
-    blurb: "Complete range of helical, bevel and worm geared motors.",
+    title: "NORD Geared Motor Range",
+    blurb: "Helical, parallel shaft, bevel and worm geared motors.",
     tags: ["Modular", "Full range"],
     image: productImages.gearedMotorsRange,
+    catalogue: "G1000",
     category: "Gear Units & Geared Motors",
   },
   {
-    id: "industrial-gear-unit",
-    title: "Industrial Gear Unit",
-    blurb: "Heavy-duty cast housing built for continuous high-torque duty.",
+    id: "maxxdrive-industrial-gear-units",
+    title: "MAXXDRIVE Industrial Gear Units",
+    blurb: "One-piece UNICASE housing to 250,000 Nm and 4,000 kW.",
     tags: ["Heavy-duty", "Modular"],
     image: productImages.industrialGearUnit,
+    catalogue: "G1050",
     category: "Gear Units & Geared Motors",
   },
   {
-    id: "industrial-gear-drive-package",
-    title: "Industrial Gear Drive Package",
-    blurb: "Gear unit, motor and coupling matched on a common baseplate.",
-    tags: ["Turnkey", "Baseplate"],
+    id: "maxxdrive-drive-package",
+    title: "MAXXDRIVE Gear Unit & Motor Package",
+    blurb: "Industrial gear unit and motor matched as one drive train.",
+    tags: ["Turnkey", "Matched"],
     image: productImages.industrialGearUnitMotor,
+    catalogue: "G1050",
     category: "Complete Drive Systems",
   },
   {
-    id: "integrated-motor-drive-unit",
-    title: "Integrated Motor + Drive Unit",
-    blurb: "Motor, gear unit and drive electronics in a single package.",
-    tags: ["Integrated", "IE5+"],
+    id: "integrated-drive-unit",
+    title: "Integrated Geared Motor & Inverter",
+    blurb: "Gear unit, motor and drive electronics in a single unit.",
+    tags: ["Integrated", "Decentralised"],
     image: productImages.integratedDrive,
+    catalogue: "F3020",
     category: "Complete Drive Systems",
   },
   {
-    id: "drive-electronics-range",
-    title: "Drive Electronics & Inverter Range",
-    blurb: "Cabinet, decentralized and field-mount frequency inverters.",
+    id: "nordac-inverter-range",
+    title: "NORDAC Frequency Inverter Range",
+    blurb: "NORDAC PRO, LINK, FLEX and BASE inverters plus START starters.",
     tags: ["Inverters", "Scalable"],
     image: productImages.groupInverter,
+    catalogue: "F3050",
     category: "Drive Electronics",
   },
 ];

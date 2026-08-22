@@ -56,10 +56,20 @@ export default function ProductsIndexPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.image}
-                    alt={`${item.title} product`}
+                    alt={`${item.title} — NORD DRIVESYSTEMS`}
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
+                  {/* The supplied renders have the NORD wordmark compressed
+                      away, so the brand is named in markup instead. */}
+                  <span className="absolute top-3 left-3 inline-flex items-center rounded-md bg-black/70 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                    NORD DRIVESYSTEMS
+                  </span>
+                  {item.catalogue && (
+                    <span className="absolute top-3 right-3 inline-flex items-center rounded-md bg-brand-orange px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-white">
+                      {item.catalogue}
+                    </span>
+                  )}
                 </div>
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <h3 className="text-lg text-brand-black leading-tight">{item.title}</h3>

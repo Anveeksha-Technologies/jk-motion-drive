@@ -2,9 +2,18 @@
 // Source files live in /product-images; the versions served from
 // /public/images/products are the same artwork optimised for the web.
 //
-// NOTE: the client supplied 8 images for ~23 product slots, so some images are
-// reused across related products. Swap the paths below as more photography
+// NOTE: the client supplied 8 images for ~24 product slots, so some images are
+// reused across related products. Swap the paths below as more artwork
 // arrives — nothing else needs to change.
+//
+// KNOWN ISSUE (raised by the client, Aug 2026): in 06-geared-motors-range the
+// NORD wordmark is illegible. The served file is an SVG wrapping a lossy
+// 1200px WebP, and the NORD gear-and-arrow mark survives on the terminal boxes
+// but the wordmark next to it is compressed away. The 3.5 MB source in
+// /product-images is an auto-trace of the same photograph at only 1.33x, so
+// re-exporting cannot recover it — this needs a higher-resolution render from
+// the NORD press kit. Until that lands, ProductCard stamps a NORD DRIVESYSTEMS
+// badge over the artwork so the brand still reads on every card.
 
 const P = "/images/products";
 
@@ -27,34 +36,45 @@ export const categoryImages: Record<string, string> = {
   "complete-drive-systems": productImages.integratedDrive,
 };
 
-/** Sub-product title -> card image */
+/**
+ * Sub-product title -> card image.
+ *
+ * Keys must match `SubProduct.title` in lib/products.ts exactly; a miss just
+ * falls through to `<ImagePlaceholder />`, so renames fail visibly rather than
+ * silently serving the wrong render.
+ */
 export const subProductImages: Record<string, string> = {
   // Gear Units & Geared Motors
-  "Helical Inline Geared Motors": productImages.helicalInline,
-  "Parallel Shaft Geared Motors": productImages.parallelShaft,
-  "Helical Bevel Geared Motors": productImages.helicalBevel,
-  "Worm Geared Motors": productImages.gearedMotorsRange,
-  "Industrial Gear Units": productImages.industrialGearUnit,
-  "Integrated Geared Motor Drive": productImages.integratedDrive,
+  "NORDBLOC.1 Helical Gear Units": productImages.helicalInline,
+  "UNICASE Helical Gear Units": productImages.helicalInline,
+  "UNICASE Parallel Shaft Gear Units": productImages.parallelShaft,
+  "UNICASE Bevel Gear Units": productImages.helicalBevel,
+  "NORDBLOC.1 2-Stage Bevel Gear Units": productImages.helicalBevel,
+  "UNICASE Helical Worm Gear Units": productImages.gearedMotorsRange,
+  "UNIVERSAL SI Worm Gear Units": productImages.gearedMotorsRange,
+  "UNIVERSAL SMI Worm Gear Units": productImages.gearedMotorsRange,
+  "MAXXDRIVE Industrial Gear Units": productImages.industrialGearUnit,
 
   // Electric Motors
-  "Asynchronous AC Motors": productImages.helicalInline,
-  "Synchronous AC Motors": productImages.parallelShaft,
-  "Explosion-Proof Motors": productImages.helicalBevel,
-  "Brake Motors": productImages.industrialGearUnitMotor,
+  "Energy-Saving Motors": productImages.industrialGearUnitMotor,
+  "Switchable Pole Motors": productImages.helicalInline,
+  "Single Phase Motors": productImages.parallelShaft,
+  "Smooth Motors": productImages.integratedDrive,
+  "Explosion Protected Motors — Gas Atmospheres": productImages.industrialGearUnitMotor,
+  "Explosion Protected Motors — Dust Atmospheres": productImages.helicalBevel,
 
   // Drive Electronics
-  "Control-Cabinet Frequency Inverters": productImages.groupInverter,
-  "Decentralized Drive Inverters": productImages.integratedDrive,
-  "Field-Mount Variable Frequency Drives": productImages.groupInverter,
-  "Motor-Mounted Starters": productImages.integratedDrive,
+  "NORDAC PRO SK 500E": productImages.groupInverter,
+  "NORDAC LINK SK 250E": productImages.groupInverter,
+  "NORDAC FLEX SK 200E": productImages.integratedDrive,
+  "NORDAC BASE SK 180E": productImages.groupInverter,
+  "NORDAC START SK 135E": productImages.integratedDrive,
 
   // Complete Drive Systems
-  "Integrated Motor + Drive Packages": productImages.integratedDrive,
-  "Conveyor Drive Packages": productImages.industrialGearUnitMotor,
-  "Overhead & Screw Conveyor Kits": productImages.gearedMotorsRange,
-  "Application Drive Kits": productImages.parallelShaft,
-  "Endurance Service Package": productImages.industrialGearUnit,
+  "Complete Drive Solutions from a Single Source": productImages.integratedDrive,
+  "NORD 4.0 READY Intelligent Drive Units": productImages.groupInverter,
+  "nsd tupH Surface-Treated Drives": productImages.gearedMotorsRange,
+  "Plug-and-Play Connection Systems": productImages.integratedDrive,
 };
 
 export function getCategoryImage(slug: string): string | undefined {
