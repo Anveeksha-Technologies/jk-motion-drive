@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Anton } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import PartnerBar from "@/components/PartnerBar";
 import Footer from "@/components/Footer";
 import FloatingWidgets from "@/components/FloatingWidgets";
 
@@ -30,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${anton.variable}`}>
       <body className="min-h-screen flex flex-col">
         <Header />
-        <PartnerBar />
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingWidgets />
