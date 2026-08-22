@@ -1,0 +1,101 @@
+{
+  "imageBasePath": "/images/products/nord",
+  "items": [
+    {
+      "id": "unicase-helical-gear-units",
+      "title": "UNICASE Helical Gear Units",
+      "blurb": "Inline output to 26,000 Nm, long life and optimum sealing.",
+      "tags": [
+        "Inline",
+        "UNICASE"
+      ],
+      "image": "unicase-helical.webp",
+      "catalogue": "G1000",
+      "category": "Gear Units & Geared Motors"
+    },
+    {
+      "id": "unicase-parallel-shaft-gear-units",
+      "title": "UNICASE Parallel Shaft Gear Units",
+      "blurb": "Compact hollow- or solid-shaft design to 100,000 Nm.",
+      "tags": [
+        "Parallel shaft",
+        "Compact"
+      ],
+      "image": "unicase-parallel-shaft.webp",
+      "catalogue": "G1000",
+      "category": "Gear Units & Geared Motors"
+    },
+    {
+      "id": "unicase-bevel-gear-units",
+      "title": "UNICASE Bevel Gear Units",
+      "blurb": "Right-angle cast-iron drive to 50,000 Nm and 200 kW.",
+      "tags": [
+        "Right-angle",
+        "Cast iron"
+      ],
+      "image": "unicase-bevel.webp",
+      "catalogue": "G1000",
+      "category": "Gear Units & Geared Motors"
+    },
+    {
+      "id": "nordbloc-helical-gear-units",
+      "title": "NORDBLOC.1 Helical Gear Units",
+      "blurb": "Die-cast aluminium housing, industry standard dimensions.",
+      "tags": [
+        "Inline",
+        "Aluminium"
+      ],
+      "image": "nordbloc-helical.webp",
+      "catalogue": "G1000",
+      "category": "Gear Units & Geared Motors"
+    },
+    {
+      "id": "maxxdrive-industrial-gear-units",
+      "title": "MAXXDRIVE Industrial Gear Units",
+      "blurb": "One-piece UNICASE housing to 250,000 Nm and 4,000 kW.",
+      "tags": [
+        "Heavy-duty",
+        "Modular"
+      ],
+      "image": "maxxdrive.webp",
+      "catalogue": "G1050",
+      "category": "Gear Units & Geared Motors"
+    },
+    {
+      "id": "maxxdrive-drive-package",
+      "title": "MAXXDRIVE Gear Unit & Motor Package",
+      "blurb": "Industrial gear unit and motor matched as one drive train.",
+      "tags": [
+        "Turnkey",
+        "Matched"
+      ],
+      "image": "complete-drive-package.webp",
+      "catalogue": "G1050",
+      "category": "Complete Drive Systems"
+    },
+    {
+      "id": "integrated-drive-unit",
+      "title": "Integrated Geared Motor & Inverter",
+      "blurb": "Gear unit, motor and drive electronics in a single unit.",
+      "tags": [
+        "Integrated",
+        "Decentralised"
+      ],
+      "image": "nordac-flex-sk200e.webp",
+      "catalogue": "F3020",
+      "category": "Complete Drive Systems"
+    },
+    {
+      "id": "nordac-inverter-range",
+      "title": "NORDAC Frequency Inverter Range",
+      "blurb": "NORDAC PRO, LINK, FLEX and BASE inverters plus START starters.",
+      "tags": [
+        "Inverters",
+        "Scalable"
+      ],
+      "image": "nordac-pro-sk500e.webp",
+      "catalogue": "F3050",
+      "category": "Drive Electronics"
+    }
+  ]
+}
