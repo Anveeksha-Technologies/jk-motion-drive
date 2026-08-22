@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-brand-black text-neutral-300">
       <div className="container-x py-14 md:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
-          <Logo variant="dark" height={52} />
+          <Logo variant="dark" size="footer" />
           <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-brand-orange/40 bg-brand-orange/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-orange">
             {site.partner}
           </p>
