@@ -7,6 +7,7 @@ updates — no code changes needed.
 | --- | --- |
 | `products.json` | The four product categories and all 24 products: names, specs, features, catalogue refs, images |
 | `portfolio.json` | The "Every Drive in the Range" tiles on the Products page |
+| `glossary.json` | Definitions behind the little (i) tooltips on the catalogue table's column headings |
 
 After **any** edit, run:
 
@@ -66,6 +67,7 @@ Each product:
 | `tags` | **Exactly two.** They render as the two small pills |
 | `specs` | `{ "label", "value" }` pairs — the table. `[]` for none |
 | `features` | Orange-ticked bullets. `[]` for none |
+| `nsdTupH` | `true` if the product is offered with the nsd tupH surface treatment (flyer page 10). Shows an orange badge on the catalogue table. Must be `true` or `false`, never missing |
 
 ## Where the numbers come from
 
@@ -95,6 +97,45 @@ at them. Notes worth knowing:
 - **The four NORDAC box renders** (SK 250E / 200E / 180E / 135E) are visually
   near-identical grey enclosures and were matched by their position in the
   flyer, not by recognising the unit. Worth a client check before print use.
+
+## Two files are generated from this folder
+
+`docs/nord-product-catalogue.md` (the written catalogue) and `public/llms.txt`
+(the summary that AI assistants read) are **built from `products.json`** — they
+are not written by hand and edits to them will be overwritten.
+
+After changing product content, regenerate them:
+
+```bash
+npm run gen:catalogue
+```
+
+`npm run check:content` also verifies they are current and fails if they are
+not, so you cannot forget: if the check goes red saying a file is out of date,
+run the command above and commit the result.
+
+This is deliberate. Before it, the product figures would have existed in two
+places — the JSON and the written catalogue — and the two would have disagreed
+the first time a specification was corrected, silently, because nothing compares
+prose against data.
+
+The catalogue table on the website reads `products.json` directly, so it needs
+no regeneration; it is always current.
+
+## Glossary — `glossary.json`
+
+Each entry is one technical term:
+
+| Field | Notes |
+| --- | --- |
+| `term` | The word as it appears in a column heading, e.g. `Torque`. Must be unique |
+| `short` | One line, under 90 characters — this is the tooltip |
+| `long` | The fuller explanation, used in the generated Markdown glossary |
+
+A spec label with no matching term simply renders without a tooltip rather than
+breaking. `npm run check:content` warns when that happens, so a new spec column
+does not quietly lose its explanation. Labels match by prefix too, which is why
+`Power — inverter` picks up the `Power` entry.
 
 ## Not in these files
 

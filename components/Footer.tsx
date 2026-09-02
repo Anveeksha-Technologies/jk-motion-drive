@@ -50,7 +50,6 @@ export default function Footer() {
               ["About Us", "/about"],
               ["Products", "/products"],
               ["Industries", "/industries"],
-              ["Gallery", "/gallery"],
               ["Contact", "/contact"],
             ].map(([label, href]) => (
               <li key={href}>
@@ -105,8 +104,8 @@ export default function Footer() {
         <div className="container-x py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
           <p>© 2026 JK Motion Drive. All rights reserved. · Powering Precision</p>
           <div className="flex items-center gap-5">
-            <Link href="#" className="hover:text-brand-orange">Privacy Policy</Link>
-            <Link href="#" className="hover:text-brand-orange">Terms</Link>
+            <Link href="/privacy" className="hover:text-brand-orange">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-brand-orange">Terms of Use</Link>
           </div>
         </div>
       </div>

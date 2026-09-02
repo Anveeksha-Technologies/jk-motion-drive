@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Bolt, Check, Cog, Cpu, Layers } from "lucide-react";
 import CtaBanner from "@/components/CtaBanner";
 import PageHero from "@/components/PageHero";
-import ProductCard from "@/components/ProductCard";
+import ProductBrowser from "@/components/ProductBrowser";
 import { getCategory, productCategories } from "@/lib/products";
+import { catalogueRows } from "@/lib/catalogue";
 import { getCategoryImage } from "@/lib/productImages";
+import { buildMetadata } from "@/lib/seo";
 
 const iconMap = {
   gear: Cog,
@@ -22,10 +24,14 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const cat = getCategory(params.slug);
   if (!cat) return {};
-  return {
-    title: `${cat.title} — JK Motion Drive`,
-    description: cat.heroDescription,
-  };
+  // Was title + description only, so these four pages shared the site-wide
+  // canonical and had no social preview. buildMetadata adds both, and appends
+  // the company name via the layout's title template rather than inline.
+  return buildMetadata({
+    title: cat.title,
+    description: cat.shortDescription,
+    path: `/products/${cat.slug}`,
+  });
 }
 
 export default function CategoryDetailPage({ params }: { params: { slug: string } }) {
@@ -63,11 +69,12 @@ export default function CategoryDetailPage({ params }: { params: { slug: string 
               Specifications as published in NORD flyer F1300.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-            {category.subProducts.map((p) => (
-              <ProductCard key={p.title} product={p} />
-            ))}
-          </div>
+          <ProductBrowser
+            rows={catalogueRows.filter((r) => r.categorySlug === category.slug)}
+            defaultView="grid"
+            pageSize={9}
+            idPrefix={`cat-${category.slug}`}
+          />
         </div>
       </section>
 

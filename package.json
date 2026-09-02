@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "check:content": "node scripts/check-content.mjs"
+    "gen:catalogue": "node scripts/gen-catalogue.mjs",
+    "check:content": "node scripts/check-content.mjs && node scripts/gen-catalogue.mjs --check",
+    "setup": "./scripts/setup.sh",
+    "deploy": "./scripts/deploy.sh preview",
+    "deploy:prod": "./scripts/deploy.sh production"
   },
   "dependencies": {
     "lucide-react": "^0.427.0",

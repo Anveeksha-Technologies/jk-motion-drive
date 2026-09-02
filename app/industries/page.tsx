@@ -2,6 +2,15 @@ import CtaBanner from "@/components/CtaBanner";
 import IndustryCard from "@/components/IndustryCard";
 import PageHero from "@/components/PageHero";
 import { industries } from "@/lib/industries";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Industries",
+  description:
+    "Drive solutions for conveying, bulk material handling, food and beverage, pharmaceutical, water treatment, cement, steel and more — engineered for the duty and supported from Ahmedabad.",
+  path: "/industries",
+});
+
 
 export default function IndustriesPage() {
   return (

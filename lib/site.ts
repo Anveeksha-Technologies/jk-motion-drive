@@ -15,6 +15,24 @@ export const site = {
   /** Registered (billing) address. Shown on Contact beneath the works address. */
   registeredAddress:
     "3, Krishna Bungalows Part – 1, B/H Anand Party Plot, B/H Tirupati Society, Opposite Punchwati Bungalows, New Ranip, Ahmedabad – 382470, Gujarat, India",
+  /**
+   * The works address split into fields, for LocalBusiness structured data.
+   *
+   * Kept alongside the display string rather than parsed out of it — the
+   * display string is punctuated for humans and would need a fragile regex,
+   * and search engines are unforgiving about a malformed PostalAddress.
+   *
+   * TODO: latitude/longitude are deliberately absent. Wrong coordinates in
+   * LocalBusiness schema send people to the wrong place, so they should be
+   * read off the client's own Google Business Profile before being added here.
+   */
+  addressParts: {
+    street: "24, Gajanan Industrial Estate, Sardar Patel Ring Road, Near Hathijan Circle Road",
+    locality: "Ahmedabad",
+    region: "Gujarat",
+    postalCode: "382445",
+    country: "IN",
+  },
   phone: "+91 9898 464 465",
   phoneHref: "tel:+919898464465",
   email: "sales@jkmotiondrive.com",
@@ -28,8 +46,13 @@ export const primaryNav = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/products", label: "Products", hasDropdown: true },
+  { href: "/catalogue", label: "Catalogue" },
   { href: "/industries", label: "Industries" },
-  { href: "/gallery", label: "Gallery" },
+  // Gallery is hidden for now at the client's request. The route still builds
+  // and works if visited directly, but it is out of the nav, out of the sitemap
+  // and out of llms.txt, and the page sets noindex. Restore by uncommenting
+  // this line and reversing the same four places.
+  // { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 

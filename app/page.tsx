@@ -17,10 +17,29 @@ import FeatureIconCard from "@/components/FeatureIconCard";
 import IndustryCard from "@/components/IndustryCard";
 import Marquee from "@/components/Marquee";
 import SectionHeading from "@/components/SectionHeading";
+import StatCounter from "@/components/StatCounter";
 import StatsBar from "@/components/StatsBar";
+import { buildMetadata } from "@/lib/seo";
+
 import { productCategories } from "@/lib/products";
 import { industries } from "@/lib/industries";
-import { whyChooseUs } from "@/lib/site";
+import { stats, whyChooseUs } from "@/lib/site";
+
+// The home page keeps the root layout's title (title.default), so this supplies
+// the canonical URL and the social tags rather than renaming the page.
+//
+// The title key is stripped rather than set to undefined: Next treats a present
+// key as an override even when its value is undefined, which blanked the
+// <title> entirely instead of falling through to the layout default.
+const { title: _layoutTitle, ...homeMetadata } = buildMetadata({
+  title: "JK Motion Drive",
+  description:
+    "Authorised Channel Partner of NORD DRIVESYSTEMS in Ahmedabad, Gujarat. Gear units, geared motors, electric motors and drive electronics, with application engineering and lifetime support.",
+  path: "/",
+});
+
+export const metadata = homeMetadata;
+
 
 const process = [
   {
@@ -49,7 +68,14 @@ const process = [
   },
 ];
 
-// TODO: client to provide real testimonials
+// Hidden for now at the client's request — see SHOW_TESTIMONIALS below.
+//
+// Worth keeping hidden until the quotes are real: every name here is
+// "[Client Name]" with a bracketed role, and five filled stars beside invented
+// praise is the kind of thing that costs trust when a buyer notices it. Swap in
+// attributable quotes, then flip the flag.
+const SHOW_TESTIMONIALS = false;
+
 const testimonials = [
   {
     quote:
@@ -81,11 +107,21 @@ const homeChecklist = [
   "After-sales support",
 ];
 
-const heroStats = [
-  { label: "Industries Served" },
-  { label: "Drive Configurations" },
-  { label: "Years of Expertise" },
+// The hero shows three of the four headline figures. These were previously
+// label-only stubs with no `value` at all, which is why the hero rendered "0"
+// three times — the numbers in lib/site.ts were never wired to it. Selected by
+// label rather than index so reordering lib/site.ts cannot silently swap them.
+// "24/7 Support & Service" is deliberately left to StatsBar: a "/7" suffix
+// counting up from zero reads as a glitch rather than an animation.
+const HERO_STAT_LABELS = [
+  "Industries Served",
+  "Drive Configurations",
+  "Years of Expertise",
 ];
+
+const heroStats = HERO_STAT_LABELS.map((label) =>
+  stats.find((s) => s.label === label)
+).filter((s): s is (typeof stats)[number] => Boolean(s));
 
 const marqueeHighlights = [
   "Precision Engineering",
@@ -147,12 +183,18 @@ export default function HomePage() {
                   key={s.label}
                   className="border-l-2 border-brand-orange/60 pl-3 md:pl-4"
                 >
-                  <div className="font-display text-3xl md:text-5xl text-white leading-none">
-                    0
-                  </div>
-                  <div className="mt-2 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-white/70">
-                    {s.label}
-                  </div>
+                  {/* Same fix as StatsBar: this rendered a literal 0 and
+                      dropped the suffix. Above the fold, so StatCounter starts
+                      immediately rather than waiting on the observer. */}
+                  <StatCounter
+                    value={s.value}
+                    suffix={s.suffix}
+                    label={s.label}
+                    align="left"
+                    className="text-left"
+                    valueClassName="font-display text-3xl md:text-5xl text-white leading-none"
+                    labelClassName="mt-2 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-white/70"
+                  />
                 </div>
               ))}
             </div>
@@ -350,7 +392,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* TESTIMONIALS — hidden, see SHOW_TESTIMONIALS at the top of this file */}
+      {SHOW_TESTIMONIALS && (
       <section className="section bg-white">
         <div className="container-x">
           <SectionHeading
@@ -384,6 +427,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      )}
 
       <CtaBanner />
     </>

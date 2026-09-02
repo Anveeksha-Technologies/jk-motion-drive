@@ -1,13 +1,19 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import CategoryCard from "@/components/CategoryCard";
+import ProductBrowser from "@/components/ProductBrowser";
 import CtaBanner from "@/components/CtaBanner";
-import NordMark from "@/components/NordMark";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import { productCategories } from "@/lib/products";
-import { portfolio } from "@/lib/portfolio";
+import { catalogueRows } from "@/lib/catalogue";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Products",
+  description:
+    "The NORD DRIVESYSTEMS range supplied by JK Motion Drive — gear units and geared motors, electric motors, drive electronics and complete drive systems from a single source.",
+  path: "/products",
+});
+
 
 export default function ProductsIndexPage() {
   return (
@@ -49,43 +55,16 @@ export default function ProductsIndexPage() {
           <SectionHeading
             eyebrow="Product Portfolio"
             title="Every Drive in the Range"
-            subtitle="Individual products across all four categories — from single geared motors to fully packaged drive systems."
+            subtitle="All 24 products across the four categories. Search by name, catalogue reference or a figure, and switch between grid and table."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {portfolio.map((item) => (
-              <div key={item.id} className="card flex flex-col h-full">
-                <div className="relative w-full aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={item.image}
-                    alt={`${item.title} — NORD DRIVESYSTEMS`}
-                    fill
-                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
-                    className="object-contain p-4"
-                  />
-                  <NordMark />
-                  {item.catalogue && (
-                    <span className="absolute top-3 right-3 inline-flex items-center rounded-md bg-brand-orange px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-white">
-                      {item.catalogue}
-                    </span>
-                  )}
-                </div>
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <h3 className="text-lg text-brand-black leading-tight">{item.title}</h3>
-                  <p className="text-sm text-neutral-500 -mt-1">{item.blurb}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map((t) => (
-                      <span key={t} className="tag-pill">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href="/contact" className="link-arrow mt-auto pt-2">
-                    Request pricing / datasheet <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ProductBrowser
+            rows={catalogueRows}
+            defaultView="grid"
+            showCategoryFilter
+            pageSize={9}
+            compactCards
+            idPrefix="portfolio"
+          />
         </div>
       </section>
 

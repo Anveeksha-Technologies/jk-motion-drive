@@ -63,6 +63,31 @@ export function getCategoryImage(slug: string): string | undefined {
   return categoryImages[slug];
 }
 
+/**
+ * Which product a category's card image actually shows.
+ *
+ * Every category reuses one of the product renders rather than having artwork
+ * of its own, so a card headed "Gear Units & Geared Motors" is in fact showing
+ * a UNICASE helical unit. Matching on the filename recovers that, which lets
+ * the card caption and its alt text name the thing in the photograph instead of
+ * describing it as the whole category.
+ *
+ * Returns undefined if a category ever gets its own artwork, in which case
+ * there is no single product to name and callers should fall back to the
+ * category title.
+ */
+const productTitleByImageFile: Record<string, string> = Object.fromEntries(
+  rawCategories
+    .flatMap((c) => c.products)
+    .filter((p) => p.image)
+    .map((p) => [p.image as string, p.title])
+);
+
+export function getCategoryImageProduct(slug: string): string | undefined {
+  const file = rawCategories.find((c) => c.slug === slug)?.image;
+  return file ? productTitleByImageFile[file] : undefined;
+}
+
 export function getSubProductImage(title: string): string | undefined {
   return subProductImages[title];
 }

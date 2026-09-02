@@ -5,6 +5,15 @@ import FeatureIconCard from "@/components/FeatureIconCard";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import { coreValues, stats } from "@/lib/site";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "About Us",
+  description:
+    "JK Motion Drive is an Authorised Channel Partner of NORD DRIVESYSTEMS, supplying and supporting industrial drive technology from Ahmedabad, Gujarat with application engineering and lifetime service.",
+  path: "/about",
+});
+
 
 const partnerChecklist = [
   "Authorised sourcing with full warranty and product traceability",

@@ -1,3 +1,4 @@
+import StatCounter from "./StatCounter";
 import { stats } from "@/lib/site";
 
 // Client-supplied industrial background. Source: /product-images/stats-bg.jpg
@@ -32,15 +33,17 @@ export default function StatsBar() {
       )}
 
       <div className="container-x py-16 md:py-24 grid grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* Was a hardcoded "0" with the suffix dropped, so the whole bar read
+            zero. StatCounter was written for exactly this and imported nowhere;
+            it counts up when the section scrolls into view. */}
         {stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <div className="font-display text-5xl md:text-7xl text-brand-orange leading-none">
-              0
-            </div>
-            <div className="mt-3 text-sm md:text-base font-medium text-neutral-300 uppercase tracking-wider">
-              {s.label}
-            </div>
-          </div>
+          <StatCounter
+            key={s.label}
+            value={s.value}
+            suffix={s.suffix}
+            label={s.label}
+            valueClassName="font-display text-5xl md:text-7xl text-brand-orange leading-none"
+          />
         ))}
       </div>
     </section>

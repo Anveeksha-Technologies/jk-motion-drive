@@ -143,7 +143,54 @@ if (products) {
             }
           }
         if (!Array.isArray(p.features)) fail(`${pw}: "features" must be an array (use [] for none)`);
+        // Drives the nsd tupH badge in the catalogue table. It must be a real
+        // boolean rather than merely truthy — a missing field would silently
+        // read as "not available" on a product that is.
+        if (typeof p.nsdTupH !== "boolean") {
+          fail(`${pw}: "nsdTupH" must be true or false (flyer page 10 lists which products offer it)`);
+        }
       }
+    }
+  }
+}
+
+// --------------------------------------------------------------- glossary
+const glossary = load("content/glossary.json");
+if (glossary) {
+  if (!Array.isArray(glossary.terms) || glossary.terms.length === 0) {
+    fail('glossary.json: "terms" must be a non-empty array');
+  } else {
+    const seenTerms = new Set();
+    for (const t of glossary.terms) {
+      const where = `glossary.json term "${t?.term ?? "?"}"`;
+      requireText(t, "term", where);
+      requireText(t, "short", where, { max: 90 });
+      requireText(t, "long", where);
+      if (t?.term) {
+        const key = t.term.toLowerCase();
+        if (seenTerms.has(key)) fail(`${where}: duplicate term — lookup is keyed by lowercased term`);
+        seenTerms.add(key);
+      }
+    }
+
+    // Every spec label in products.json should resolve to a glossary entry,
+    // otherwise that column renders without a tooltip. Same prefix fallback as
+    // lib/glossary.ts, so the two agree on what counts as resolvable.
+    const termKeys = [...seenTerms].sort((a, b) => b.length - a.length);
+    const resolves = (label) => {
+      const key = label.trim().toLowerCase();
+      return termKeys.some((k) => key === k || key.startsWith(k));
+    };
+    const unresolved = new Set();
+    for (const c of products?.categories ?? []) {
+      for (const p of c.products ?? []) {
+        for (const s of p.specs ?? []) {
+          if (typeof s?.label === "string" && !resolves(s.label)) unresolved.add(s.label);
+        }
+      }
+    }
+    for (const label of unresolved) {
+      warn(`glossary.json: no entry matches spec label "${label}" — that column will render without a tooltip`);
     }
   }
 }
@@ -171,6 +218,53 @@ if (portfolio) {
       checkImage(base, i.image, where);
       if (i.category && categoryTitles.size && !categoryTitles.has(i.category)) {
         warn(`${where}: category "${i.category}" does not match any category title in products.json`);
+      }
+    }
+  }
+}
+
+// ------------------------------------------------------- contact details
+//
+// The phone number exists three times in lib/site.ts: once formatted for
+// people (`phone`), once as a tel: URI (`phoneHref`) and once inside a wa.me
+// URL (`whatsapp`). Nothing forces them to agree, so a corrected number that
+// only lands in one of them would leave the site displaying one number and
+// dialling another — the kind of fault nobody notices until a customer cannot
+// reach the company. This compares the digits of all three.
+{
+  const src = existsSync(path.join(ROOT, "lib/site.ts"))
+    ? readFileSync(path.join(ROOT, "lib/site.ts"), "utf8")
+    : null;
+
+  if (!src) {
+    fail("lib/site.ts is missing");
+  } else {
+    const field = (name) => src.match(new RegExp(`\\n\\s*${name}:\\s*"([^"]+)"`))?.[1];
+    const digits = (v) => (v ?? "").replace(/\D/g, "");
+
+    const phone = field("phone");
+    const phoneHref = field("phoneHref");
+    const whatsapp = field("whatsapp");
+
+    if (!phone || !phoneHref || !whatsapp) {
+      fail('lib/site.ts: could not read "phone", "phoneHref" and "whatsapp" — update this check if the shape changed');
+    } else {
+      const shown = digits(phone);
+      if (digits(phoneHref) !== shown) {
+        fail(`lib/site.ts: phoneHref (${phoneHref}) does not dial the number shown on the site (${phone})`);
+      }
+      if (digits(whatsapp) !== shown) {
+        fail(`lib/site.ts: whatsapp URL (${whatsapp}) does not match the number shown on the site (${phone})`);
+      }
+      if (!phoneHref.startsWith("tel:+")) {
+        fail(`lib/site.ts: phoneHref should start with "tel:+" so it dials internationally (got "${phoneHref}")`);
+      }
+      if (!/^https:\/\/wa\.me\/\d{10,15}(\?|$)/.test(whatsapp)) {
+        fail(`lib/site.ts: whatsapp should be https://wa.me/<country code><number>, digits only (got "${whatsapp}")`);
+      }
+      // wa.me wants the country code with no + and no separators.
+      if (whatsapp.includes("+") && !whatsapp.includes("?")) {
+        fail("lib/site.ts: the wa.me URL must not contain a + — WhatsApp expects bare digits");
       }
     }
   }

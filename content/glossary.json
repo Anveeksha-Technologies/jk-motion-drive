@@ -1,0 +1,70 @@
+{
+  "_comment": "Tooltip copy for technical terms shown in the catalogue table. Definitions are drawn from NORD flyer F1300 (Mat.-Nr. 6021602 / 1118), the same source as products.json. 'short' is the one-line tooltip; 'long' is the fuller explanation used in the generated Markdown glossary.",
+  "terms": [
+    {
+      "term": "Sizes",
+      "short": "How many discrete frame sizes NORD builds in this range.",
+      "long": "The number of discrete frame sizes available in the range. Each size covers a band of torque and power, so more sizes means a closer match to a given duty rather than rounding up to the next unit."
+    },
+    {
+      "term": "Power",
+      "short": "Motor power the unit is rated for, in kilowatts.",
+      "long": "The rated motor power the unit is built for, in kilowatts (kW). Quoted as the span from the smallest to the largest unit in the range."
+    },
+    {
+      "term": "Torque",
+      "short": "Output torque at the gear unit shaft, in newton-metres.",
+      "long": "Output torque delivered at the gear unit shaft, in newton-metres (Nm). This is the figure that determines whether a unit can move the load, and is quoted across the whole range from smallest to largest size."
+    },
+    {
+      "term": "Ratio",
+      "short": "Reduction between input and output speed.",
+      "long": "The reduction ratio between input and output speed. A ratio of 10:1 turns the output shaft once for every ten input revolutions, trading speed for torque."
+    },
+    {
+      "term": "Voltage",
+      "short": "Supply voltage. 1~ is single-phase, 3~ is three-phase.",
+      "long": "Supply voltage the unit accepts. The 1~ prefix denotes single-phase supply and 3~ denotes three-phase. Several NORDAC units accept more than one supply band."
+    },
+    {
+      "term": "UNICASE",
+      "short": "NORD's one-piece housing — every bearing seat machined in a single operation.",
+      "long": "NORD's one-piece gear unit housing, developed in 1981. All bearings are integrated into a housing machined from a single block in one operation, so there are no separating joints and no sealing surfaces subject to torque. The result is high output torque, high axial and radial load capacity, precise axis alignment, quiet running and long service life."
+    },
+    {
+      "term": "NORDBLOC.1",
+      "short": "NORD's die-cast aluminium gear unit line in industry standard dimensions.",
+      "long": "NORD's compact gear unit line built in a die-cast aluminium UNICASE housing to industry standard dimensions, available foot or flange mounted."
+    },
+    {
+      "term": "MAXXDRIVE",
+      "short": "NORD's modular industrial gear units, to 250,000 Nm.",
+      "long": "NORD's modular industrial gear unit range in a one-piece UNICASE housing, with output torque up to 250,000 Nm. All bearing points and sealing surfaces are machined in a single operation, and the same foot dimensions cover a gear ratio range of 5.54 to 400:1."
+    },
+    {
+      "term": "nsd tupH",
+      "short": "Sealed surface conversion — a corrosion-resistant alternative to stainless steel.",
+      "long": "A sealed surface conversion system applied to aluminium housing components, offered as an alternative to stainless steel. Surfaces are easy to clean, resistant to acids and alkalis across a wide pH range, corrosion resistant, free from chromates and conform to FDA Title 21 CFR 175.300. The coating does not blister or flake even when damaged. Suited to food and beverage, dairies, pharmaceutical, water and sewage, car wash, and offshore or coastal installations."
+    },
+    {
+      "term": "POSICON",
+      "short": "NORD's positioning control, integrated into the inverter.",
+      "long": "NORD's positioning control, integrated into the frequency inverter so that positioning tasks are handled by the drive itself rather than by the plant control system."
+    },
+    {
+      "term": "ISD control",
+      "short": "Sensorless current vector control — torque control without an encoder.",
+      "long": "Sensorless current vector control. The inverter derives motor state from current measurement rather than from a shaft encoder, giving controlled torque without additional sensing hardware."
+    },
+    {
+      "term": "Integrated PLC",
+      "short": "A programmable controller inside the drive, at no extra cost.",
+      "long": "A programmable logic controller built into the drive electronics at no extra cost. It processes sensor and actuator data locally, can run sequence control, and lets the drive respond to process changes or remedy faults without intervention from the plant control system."
+    },
+    {
+      "term": "IE1-IE4",
+      "short": "International motor energy efficiency classes, per IEC 60034-30.",
+      "long": "International energy efficiency classes for electric motors as defined by IEC 60034-30, where a higher number is more efficient. NORD additionally supplies to US EISA 2007, Canadian EER 2010, Chinese GB 18613, Korean REELS 2010, Brazilian Decreto 4.508 and Australian AS/NZS 1359.5."
+    }
+  ]
+}

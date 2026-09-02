@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight, Bolt, ChevronDown, Cog, Cpu, Layers, Menu, X, type LucideIcon } from "lucide-react";
 import Logo from "./Logo";
 import { primaryNav } from "@/lib/site";
@@ -23,6 +23,36 @@ export default function Header() {
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Mega-menu open/close intent.
+  //
+  // The panel is right-aligned to the header container, so the pointer has to
+  // travel from the "Products" link across to it. Closing the instant the
+  // pointer leaves the link made those four links unreachable. A short close
+  // delay lets the pointer cross, and any re-entry cancels the pending close.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }, []);
+
+  const openProducts = useCallback(() => {
+    cancelClose();
+    setProductsOpen(true);
+  }, [cancelClose]);
+
+  const closeProducts = useCallback(
+    (delay = 220) => {
+      cancelClose();
+      closeTimer.current = setTimeout(() => setProductsOpen(false), delay);
+    },
+    [cancelClose]
+  );
+
+  useEffect(() => cancelClose, [cancelClose]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -65,21 +95,45 @@ export default function Header() {
           aria-hidden
         />
       </div>
-      <div className="container-x flex items-center justify-between h-16 md:h-20">
+      {/* `relative` here, not on the nav item: the Products mega-menu is
+          right-aligned to this container so it can never run off the left edge
+          of the viewport. Anchored to the nav item instead, a 720px panel
+          starts 720px left of "Products" and gets clipped on narrow desktops. */}
+      <div className="container-x relative flex items-center justify-between h-16 md:h-20">
         <Logo />
 
-        <nav className="hidden md:flex items-center gap-0.5 xl:gap-1">
+        {/* `self-stretch` so the nav fills the bar's full height — that is what
+            lets the Products trigger below be `h-full` and leave no gap between
+            the link and the panel. */}
+        <nav className="hidden md:flex self-stretch items-center gap-0.5 xl:gap-1">
           {primaryNav.map((item) => {
             if (item.hasDropdown) {
               return (
                 <div
                   key={item.href}
-                  className="relative"
-                  onMouseEnter={() => setProductsOpen(true)}
-                  onMouseLeave={() => setProductsOpen(false)}
+                  // `h-full` matters: the trigger now fills the header bar, so
+                  // moving straight down from the link never crosses a dead
+                  // band between the link's own box and the panel below it.
+                  className="h-full flex items-center"
+                  onMouseEnter={openProducts}
+                  onMouseLeave={() => closeProducts()}
+                  onFocus={openProducts}
+                  onBlur={(e) => {
+                    // Only close when focus actually leaves the menu, not when
+                    // it moves between the trigger and the links inside it.
+                    if (!e.currentTarget.contains(e.relatedTarget as Node)) closeProducts(0);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape" && productsOpen) {
+                      cancelClose();
+                      setProductsOpen(false);
+                    }
+                  }}
                 >
                   <Link
                     href={item.href}
+                    aria-expanded={productsOpen}
+                    aria-haspopup="true"
                     className={`inline-flex items-center gap-1 px-2.5 xl:px-4 py-2 text-sm font-semibold transition-colors ${
                       isActive(item.href)
                         ? "text-brand-orange"
@@ -90,7 +144,7 @@ export default function Header() {
                     <ChevronDown className="w-4 h-4" />
                   </Link>
                   {productsOpen && (
-                    <div className="absolute right-0 top-full pt-3 w-[92vw] max-w-[720px]">
+                    <div className="absolute right-5 sm:right-6 lg:right-10 top-full pt-3 w-[calc(100vw-2.5rem)] max-w-[720px]">
                       <div className="rounded-2xl border border-neutral-200 bg-white shadow-card-hover overflow-hidden">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4">
                           {productCategories.map((cat) => {

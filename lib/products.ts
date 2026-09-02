@@ -34,6 +34,16 @@ export type SubProduct = {
   specs?: Spec[];
   /** Feature bullets, as worded in the flyer. */
   features?: string[];
+  /**
+   * Available with the nsd tupH sealed surface conversion (flyer page 10).
+   *
+   * Page 10 lists six items; five map onto product titles here. The sixth,
+   * "NORDBLOC.1 Helical bevel gear units (up to size 6)", is a distinct NORD
+   * family with no row of its own — the nearest title, "NORDBLOC.1 Helical
+   * Gear Units", is a different product — so it is left false rather than
+   * mis-tagged.
+   */
+  nsdTupH: boolean;
 };
 
 export type ProductCategory = {
@@ -57,6 +67,7 @@ type RawProduct = {
   tags: string[];
   specs: Spec[];
   features: string[];
+  nsdTupH: boolean;
 };
 
 type RawCategory = {
@@ -108,6 +119,7 @@ export const productCategories: ProductCategory[] = file.categories.map((c) => (
     catalogue: p.catalogue ?? undefined,
     specs: p.specs.length ? p.specs : undefined,
     features: p.features.length ? p.features : undefined,
+    nsdTupH: p.nsdTupH,
   })),
 }));
 

@@ -54,7 +54,8 @@
             "Die-cast aluminium housing",
             "UNICASE housing",
             "Industry standard dimensions"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "UNICASE Helical Gear Units",
@@ -88,7 +89,8 @@
             "Long life, low maintenance",
             "Optimum sealing",
             "UNICASE housing"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "UNICASE Parallel Shaft Gear Units",
@@ -122,7 +124,8 @@
             "Hollow or solid shaft",
             "Compact design",
             "UNICASE cast-iron housing"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "UNICASE Bevel Gear Units",
@@ -155,7 +158,8 @@
             "Foot mounted, flange mounted or hollow shaft mounted",
             "Hollow or solid shaft",
             "UNICASE cast-iron housing"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "NORDBLOC.1 2-Stage Bevel Gear Units",
@@ -188,7 +192,8 @@
             "Foot mounted, flange mounted or hollow shaft mounted",
             "Hollow or solid shaft",
             "UNICASE aluminium housing"
-          ]
+          ],
+          "nsdTupH": true
         },
         {
           "title": "UNICASE Helical Worm Gear Units",
@@ -221,7 +226,8 @@
             "Foot mounted, flange mounted or hollow shaft mounted",
             "Hollow or solid shaft",
             "UNICASE cast-iron housing"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "UNIVERSAL SI Worm Gear Units",
@@ -255,7 +261,8 @@
             "Universal attachment",
             "Life-long lubrication",
             "IEC versions"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "UNIVERSAL SMI Worm Gear Units",
@@ -289,7 +296,8 @@
             "Universal attachment",
             "Life-long lubrication",
             "IEC versions"
-          ]
+          ],
+          "nsdTupH": true
         },
         {
           "title": "MAXXDRIVE Industrial Gear Units",
@@ -325,7 +333,8 @@
             "Long life, low maintenance",
             "Gear ratio range 5.54 to 400:1 with the same foot dimensions",
             "Parallel axis and right-angled gear units"
-          ]
+          ],
+          "nsdTupH": false
         }
       ]
     },
@@ -364,7 +373,8 @@
             "Designed in compliance with international standards",
             "High overload capacity",
             "Energy-efficient"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "Switchable Pole Motors",
@@ -376,7 +386,8 @@
             "Multi-speed"
           ],
           "specs": [],
-          "features": []
+          "features": [],
+          "nsdTupH": false
         },
         {
           "title": "Single Phase Motors",
@@ -388,7 +399,8 @@
             "Compact"
           ],
           "specs": [],
-          "features": []
+          "features": [],
+          "nsdTupH": false
         },
         {
           "title": "Smooth Motors",
@@ -404,7 +416,8 @@
             "Smooth, easy-to-clean surface with no cooling fins",
             "Suited to hygienic and wash-down environments",
             "Available with nsd tupH surface treatment"
-          ]
+          ],
+          "nsdTupH": true
         },
         {
           "title": "Explosion Protected Motors — Gas Atmospheres",
@@ -416,7 +429,8 @@
             "Gas"
           ],
           "specs": [],
-          "features": []
+          "features": [],
+          "nsdTupH": false
         },
         {
           "title": "Explosion Protected Motors — Dust Atmospheres",
@@ -428,7 +442,8 @@
             "Dust"
           ],
           "specs": [],
-          "features": []
+          "features": [],
+          "nsdTupH": false
         }
       ]
     },
@@ -481,7 +496,8 @@
             "Energy-saving function",
             "Integrated POSICON positioning control",
             "Plug-in communication modules (field bus)"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "NORDAC LINK SK 250E",
@@ -514,7 +530,8 @@
             "Frequency inverter or motor starter",
             "All connections in plug-in version for easy commissioning and maintenance",
             "PLC functionality for drive-integrated functions"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "NORDAC FLEX SK 200E",
@@ -543,7 +560,8 @@
             "Energy-saving function",
             "Integrated POSICON positioning control",
             "Integrated PLC"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "NORDAC BASE SK 180E",
@@ -573,7 +591,8 @@
             "4 parameter sets",
             "Sensorless current vector control (ISD control)",
             "Integrated PLC"
-          ]
+          ],
+          "nsdTupH": true
         },
         {
           "title": "NORDAC START SK 135E",
@@ -602,7 +621,8 @@
             "Integrated electronic brake rectifier",
             "Consistent parameter structure",
             "Reversing starter with soft start function"
-          ]
+          ],
+          "nsdTupH": true
         }
       ]
     },
@@ -642,7 +662,8 @@
             "Powerful motors up to IE4 keep the drive systems moving in any operating situation",
             "Intelligent drive electronics provide exactly the control facilities you need",
             "Short planning and assembly times with high delivery availability"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "NORD 4.0 READY Intelligent Drive Units",
@@ -659,7 +680,8 @@
             "Drive units communicate with each other and with the control centre",
             "Inverters monitor themselves, the motor and the load situation in the plant",
             "Hundreds of typical functions and parameters saved and simply adopted"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "nsd tupH Surface-Treated Drives",
@@ -677,7 +699,8 @@
             "Corrosion resistant, prevents contact corrosion",
             "Conforms to FDA Title 21 CFR 175.300 and is free from chromates",
             "Available on NORDBLOC.1 bevel, UNIVERSAL SMI, smooth motors, SK 180E and SK 135E"
-          ]
+          ],
+          "nsdTupH": false
         },
         {
           "title": "Plug-and-Play Connection Systems",
@@ -694,7 +717,8 @@
             "Plug-in supply cable and motor output",
             "Plug-in sensors and encoders, with pre-assembled cables",
             "Mains switch and local/remote selector directly on the drive unit"
-          ]
+          ],
+          "nsdTupH": false
         }
       ]
     }

@@ -4,6 +4,23 @@ import CtaBanner from "@/components/CtaBanner";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
+import { buildMetadata } from "@/lib/seo";
+
+// Hidden for now at the client's request — see the note in lib/site.ts. The
+// route still builds and renders if visited directly, but it is out of the nav,
+// the footer, the sitemap and llms.txt, and is marked noindex so search engines
+// that already know the URL drop it rather than serving a page we have chosen
+// not to link to.
+export const metadata = {
+  ...buildMetadata({
+    title: "Gallery & Downloads",
+    description:
+      "Installation and commissioning photography from JK Motion Drive, plus NORD product catalogues available to download.",
+    path: "/gallery",
+  }),
+  robots: { index: false, follow: false },
+};
+
 
 // `image` is optional: a tile without one falls back to a placeholder, so new
 // captions can be added ahead of their photography.
