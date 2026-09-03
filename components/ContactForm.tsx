@@ -26,16 +26,49 @@ import { siteUrl } from "@/lib/seo";
 //    falls back to the previous local-state behaviour when it is not, so the
 //    form still demos before the endpoint exists.
 //
-// WHY A NATIVE POST RATHER THAN fetch()
+// HOW IT SUBMITS
 //
-// FormSubmit's standard endpoint does not send CORS headers, so a fetch() from
-// the browser is blocked. A native form POST has no such restriction. `_next`
-// brings the visitor back to /contact?sent=1, which is what renders the success
-// banner below. (FormSubmit also has an /ajax/ endpoint that does allow CORS,
-// but it needs the URL shaped differently, and hard-coding that shape would
-// break the moment the endpoint is anything else.)
+// Progressive enhancement, because the two paths have different constraints.
+//
+// With JavaScript (everyone, in practice) the form POSTs to FormSubmit's
+// /ajax/ endpoint, which does send CORS headers, and the visitor never leaves
+// the page — they get an inline confirmation. The first version posted natively
+// and let FormSubmit redirect back via `_next`, which meant a visible round trip
+// through formsubmit.co and a hard dependency on NEXT_PUBLIC_SITE_URL being
+// right. Staying put is better, and it removes that dependency.
+//
+// Without JavaScript the `action`/`method` attributes still carry a plain form
+// POST to the non-AJAX endpoint, and `_next` brings the visitor back. That path
+// is unchanged and is why the control fields are still rendered.
+//
+// `toAjaxEndpoint` only rewrites formsubmit.co URLs. Any other endpoint is
+// posted to as configured, so this stays provider-agnostic.
 
 const ENDPOINT = process.env.NEXT_PUBLIC_FORMSUBMIT_ENDPOINT;
+
+/**
+ * FormSubmit's CORS-enabled variant of the same endpoint.
+ *
+ * https://formsubmit.co/<token>  ->  https://formsubmit.co/ajax/<token>
+ *
+ * Returns null when the URL is not FormSubmit or is already an /ajax/ URL that
+ * needs no rewriting, in which case the caller posts to it as given.
+ */
+function toAjaxEndpoint(url: string | undefined): string | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    if (!/(^|\.)formsubmit\.co$/i.test(u.hostname)) return null;
+    if (u.pathname.startsWith("/ajax/")) return u.toString();
+    return `${u.origin}/ajax${u.pathname}${u.search}`;
+  } catch {
+    return null;
+  }
+}
+
+const AJAX_ENDPOINT = toAjaxEndpoint(ENDPOINT);
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 /** The subset of a catalogue row the form needs, resolved server-side. */
 export type EnquiryProduct = {
@@ -53,16 +86,46 @@ export default function ContactForm({
   product: EnquiryProduct | null;
   justSent?: boolean;
 }) {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // Only intercept while there is nowhere to post to. With an endpoint
-    // configured the browser performs a normal submit.
-    if (ENDPOINT) return;
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // No endpoint configured: keep the original demo behaviour so the form
+    // still shows a result before FormSubmit is wired up.
+    if (!ENDPOINT) {
+      e.preventDefault();
+      setStatus("sent");
+      (e.target as HTMLFormElement).reset();
+      setTimeout(() => setStatus("idle"), 4000);
+      return;
+    }
+
+    // A non-FormSubmit endpoint gets the plain native POST it was configured
+    // for; there is no way to know it tolerates cross-origin fetch.
+    if (!AJAX_ENDPOINT) return;
+
     e.preventDefault();
-    setSubmitted(true);
-    (e.target as HTMLFormElement).reset();
-    setTimeout(() => setSubmitted(false), 4000);
+    const form = e.currentTarget;
+    setStatus("sending");
+
+    try {
+      const res = await fetch(AJAX_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      // FormSubmit answers 200 with {"success":"true"} — the string, not a
+      // boolean — and uses 4xx for an unactivated or unknown endpoint.
+      const data = await res.json().catch(() => null);
+      const ok = res.ok && String(data?.success ?? "true") === "true";
+      if (!ok) throw new Error(data?.message ?? `HTTP ${res.status}`);
+
+      form.reset();
+      setStatus("sent");
+    } catch {
+      // Never silently swallow this. A form that says nothing after a failure
+      // loses the enquiry and the visitor never knows.
+      setStatus("error");
+    }
   };
 
   const subject = product
@@ -203,13 +266,39 @@ export default function ContactForm({
         />
       </label>
 
-      <button type="submit" className="btn-primary self-start">
-        Send Enquiry <Send className="w-4 h-4" />
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="btn-primary self-start disabled:opacity-60 disabled:pointer-events-none"
+      >
+        {status === "sending" ? "Sending…" : "Send Enquiry"}
+        <Send className="w-4 h-4" />
       </button>
 
-      {(submitted || justSent) && (
-        <div className="rounded-md bg-green-50 border border-green-200 text-green-800 text-sm px-4 py-3">
+      {(status === "sent" || justSent) && (
+        <div
+          role="status"
+          className="rounded-md bg-green-50 border border-green-200 text-green-800 text-sm px-4 py-3"
+        >
           Thanks — your enquiry has been received. Our team will be in touch shortly.
+        </div>
+      )}
+
+      {status === "error" && (
+        <div
+          role="alert"
+          className="rounded-md bg-red-50 border border-red-200 text-red-800 text-sm px-4 py-3"
+        >
+          <strong className="font-semibold">That didn&apos;t send.</strong> Something went wrong at
+          our end — please try again, or reach us directly on{" "}
+          <a href={site.phoneHref} className="underline underline-offset-2">
+            {site.phone}
+          </a>{" "}
+          or{" "}
+          <a href={site.emailHref} className="underline underline-offset-2">
+            {site.email}
+          </a>
+          .
         </div>
       )}
     </form>
