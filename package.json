@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "node scripts/gen-catalogue.mjs",
+    "build": "npm run check:content && next build",
     "start": "next start",
     "lint": "next lint",
     "gen:catalogue": "node scripts/gen-catalogue.mjs",

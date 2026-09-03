@@ -43,3 +43,8 @@ next-env.d.ts
 
 # ...but the template of which variables exist is meant to be committed.
 !.env.example
+
+# Generated at build time from content/products.json, with URLs that depend on
+# NEXT_PUBLIC_SITE_URL — so it must not be committed, or its content would
+# depend on whichever environment last built it. See scripts/gen-catalogue.mjs.
+/public/llms.txt

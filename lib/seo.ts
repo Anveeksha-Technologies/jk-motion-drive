@@ -17,9 +17,41 @@ import { site } from "./site";
  * URL — does not require a code change. The default is the production domain
  * implied by the company's own email address.
  */
-export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jkmotiondrive.com"
-).replace(/\/+$/, "");
+const FALLBACK_ORIGIN = "https://www.jkmotiondrive.com";
+
+/**
+ * Resolve the canonical origin from the environment, defensively.
+ *
+ * Two ways this used to break a build, both easy to do in a hosting dashboard:
+ *
+ *  - **An empty value.** `??` falls back only on null/undefined, so an empty
+ *    string passed straight through and `new URL("")` threw during metadata
+ *    collection — the build failed with "Failed to collect page data", which
+ *    names a page and says nothing about the real cause.
+ *  - **A bare domain.** Vercel shows deployment URLs without a scheme, so
+ *    pasting one gives "example.vercel.app", which is not a valid URL either.
+ *
+ * Anything unusable falls back to the production origin rather than failing the
+ * build: a wrong canonical is a fixable SEO problem, a broken build is an
+ * outage.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return FALLBACK_ORIGIN;
+
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    const url = new URL(withScheme);
+    // `new URL("https://!!!")` parses happily, so check the hostname actually
+    // looks like one — a dotted name, or localhost.
+    const looksReal = url.hostname === "localhost" || /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(url.hostname);
+    return looksReal ? url.origin : FALLBACK_ORIGIN;
+  } catch {
+    return FALLBACK_ORIGIN;
+  }
+}
+
+export const siteUrl = resolveSiteUrl();
 
 const absolute = (path: string) => `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 

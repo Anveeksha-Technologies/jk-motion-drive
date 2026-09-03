@@ -29,10 +29,39 @@ const read = (rel) => JSON.parse(readFileSync(path.join(ROOT, rel), "utf8"));
 
 const products = read("content/products.json");
 const glossary = read("content/glossary.json");
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jkmotiondrive.com").replace(
-  /\/+$/,
-  ""
-);
+// TWO URLS, DELIBERATELY.
+//
+// A file that is committed to git cannot depend on a runtime environment
+// variable, or its drift check becomes environment-dependent — which is exactly
+// what broke the Vercel build: `--check` regenerated the committed files using
+// the deployment's NEXT_PUBLIC_SITE_URL, they no longer matched what was in the
+// repository, and the build failed the moment that variable was set.
+//
+// So the two outputs are split by whether they are committed:
+//
+//   docs/nord-product-catalogue.md   committed  -> CANONICAL_URL, a constant.
+//                                    Deterministic, so --check is meaningful.
+//   public/llms.txt                  generated  -> SITE_URL, from the env.
+//                                    Regenerated every build, gitignored, and
+//                                    not drift-checked, because its URLs must
+//                                    match the deployment serving it.
+const CANONICAL_URL = "https://www.jkmotiondrive.com";
+
+const SITE_URL = (() => {
+  // Same guards as resolveSiteUrl() in lib/seo.ts: an empty value or a bare
+  // domain must not produce a broken llms.txt.
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return CANONICAL_URL;
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    const url = new URL(withScheme);
+    const looksReal =
+      url.hostname === "localhost" || /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(url.hostname);
+    return looksReal ? url.origin : CANONICAL_URL;
+  } catch {
+    return CANONICAL_URL;
+  }
+})();
 
 /**
  * Pull the contact details out of lib/site.ts.
@@ -120,7 +149,7 @@ function buildMarkdown() {
     "That flyer caps MAXXDRIVE at 250,000 Nm and rates motors IE1–IE4. NORD's current range goes further (282,000 Nm, IE5+), but the client asked us to follow the supplied flyer exactly, so the flyer wins throughout."
   );
   L.push("");
-  L.push(`Browse the same catalogue with search and filters at ${SITE_URL}/catalogue.`);
+  L.push(`Browse the same catalogue with search and filters at ${CANONICAL_URL}/catalogue.`);
   L.push("");
 
   // ---- contents
@@ -284,13 +313,23 @@ function buildLlmsTxt() {
 /* ---------------------------------------------------------------- write */
 
 const outputs = [
-  { rel: "docs/nord-product-catalogue.md", content: buildMarkdown() },
-  { rel: "public/llms.txt", content: buildLlmsTxt() },
+  // committed -> deterministic -> drift-checked
+  { rel: "docs/nord-product-catalogue.md", content: buildMarkdown(), checked: true },
+  // build artefact -> varies by deployment -> written, never compared
+  { rel: "public/llms.txt", content: buildLlmsTxt(), checked: false },
 ];
 
 let stale = 0;
-for (const { rel, content } of outputs) {
+for (const { rel, content, checked } of outputs) {
   const abs = path.join(ROOT, rel);
+
+  // In --check mode the unchecked artefacts are still written, so that a build
+  // which runs the check also ends up with a current llms.txt.
+  if (CHECK && !checked) {
+    mkdirSync(path.dirname(abs), { recursive: true });
+    writeFileSync(abs, content, "utf8");
+    continue;
+  }
 
   if (CHECK) {
     const existing = existsSync(abs) ? readFileSync(abs, "utf8") : null;
@@ -310,5 +349,8 @@ for (const { rel, content } of outputs) {
 
 if (CHECK) {
   if (stale) process.exit(1);
-  console.log(`Catalogue docs up to date — ${outputs.map((o) => o.rel).join(", ")}`);
+  console.log(
+    `Catalogue docs up to date — ${outputs.filter((o) => o.checked).map((o) => o.rel).join(", ")}` +
+      " (public/llms.txt regenerated)"
+  );
 }
